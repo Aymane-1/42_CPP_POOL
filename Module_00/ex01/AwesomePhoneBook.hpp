@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:02:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/07 01:23:11 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/07 04:54:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ class Contact{
 	std::string PhoneNumber;
 	std::string DarkestSecret;
 	public:
-	void		get_FirstName(void);
-	void		get_LastName(void);
-	void		get_NickName(void);
-	void		get_PhoneNumber(void);
-	void		get_DarkestSecret(void);
+	void		get_FirstName(void); // return string
+	void		get_LastName(void);	// return string
+	void		get_NickName(void); // return string
+	void		get_PhoneNumber(void); // return string
+	void		get_DarkestSecret(void); // return string
 	void		set_FirstName(std::string s);
 	void		set_LastName(std::string s);
 	void		set_NickName(std::string s);
@@ -49,7 +49,7 @@ class PhoneBook{
 	void	Search(PhoneBook &Book);
 	void	Exit();
 	void	set_Contact(void);
-	void	PhoneBookList(void);
+	void	PhoneBookList(Contact Cntct);
 };
 
 #endif

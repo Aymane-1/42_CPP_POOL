@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:06:56 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/07 02:19:09 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/07 04:55:31 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	PhoneBook::Add(Contact &NewContact)
 	NewContact.set_DarkestSecret(input);
 }
 
-void	PhoneBook::PhoneBookList(Contact Cntct)
+void	PhoneBook::PhoneBookList(Contact Cntct) /* Use getters to display the corresponding data */
 {
 	std::cout << std::setw(10) << "|-----------*** CONTACT LIST ***------------|" << std::endl;
 	std::cout << "|" << std::right << std::setw(10) << "Index" << "|";
@@ -67,7 +67,8 @@ void	PhoneBook::PhoneBookList(Contact Cntct)
 	std::cout << std::right << std::setw(10) << "Last Name"  << "|";
 	std::cout << std::right << std::setw(10) << "Nickname"  << "|" << std:: endl;
 	std::cout << std::setw(10) << "|-------------------------------------------|" << std::endl;
-	// if (.size)
+	if (!(Cntct.FirstName.size())) // Modify the getters return value to strings;
+		std::cout << "Empty!" << std::endl;
 		
 }
 
