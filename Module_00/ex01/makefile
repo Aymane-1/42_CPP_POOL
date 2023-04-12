@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 21:59:56 by aechafii          #+#    #+#              #
-#    Updated: 2023/04/06 22:46:14 by aechafii         ###   ########.fr        #
+#    Updated: 2023/04/12 21:31:45 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC =   PhoneBook.cpp \
 		ClassMemberFunc.cpp  \
 		Tools.cpp
 
-HEADER = AwesomePhoneBook.hpp
+HEADER = PhoneBook.hpp Contact.hpp
 
 OBJ = $(SRC:.c=.o)
 

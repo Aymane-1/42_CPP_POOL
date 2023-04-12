@@ -6,11 +6,11 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:02:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 03:11:24 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:43:59 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AwesomePhoneBook.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
@@ -36,11 +36,11 @@ int main()
 				i = 0;
 			if (Flag == 1)
 			{
-				Book.set_Contact();
+				Book.set_Contact(i);
 				i++;
 			}
 			if (Flag == 2)
-				Book.Search(Book);
+				Book.Search();
 			if (Flag == 3)
 				Book.Exit();
 		}

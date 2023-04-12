@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 02:45:37 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 21:47:53 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:27:20 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,15 @@ void	Contact::set_DarkestSecret(std::string s)
 {
 	Contact::DarkestSecret = s;
 }
+
+//-----------------------*** PhoneBook Class member functions ***-----------------------//
+
+// std::string	PhoneBook::get_Contact(void)
+// {
+// 	return (PhoneBook::contacts[0].get_FirstName());
+// }
+
+// void	PhoneBook::set_Contact(void)
+// {
+// 	PhoneBook::contacts[0].set_FirstName();
+// }

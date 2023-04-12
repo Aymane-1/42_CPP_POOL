@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AwesomePhoneBook.hpp                               :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 22:02:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 03:35:31 by aechafii         ###   ########.fr       */
+/*   Created: 2023/04/12 21:27:45 by aechafii          #+#    #+#             */
+/*   Updated: 2023/04/12 21:45:41 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef AWESOMEPHONEBOOK_HPP
-# define AWESOMEPHONEBOOK_HPP
+# ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 #include <string.h>
 #include <iostream>
@@ -37,22 +37,6 @@ class Contact{
 	void		set_NickName(std::string s);
 	void		set_PhoneNumber(std::string s);
 	void		set_DarkestSecret(std::string s);
-};
-
-class PhoneBook{
-	private:
-	Contact contacts[8];
-	public:
-	int			check_input(std::string s);
-	void		entry_display(void);
-	void		Add(Contact &NewContact);
-	void		Search(PhoneBook &Book);
-	void		Exit(void);
-	void		prompt(void);
-	void		set_Contact(void);
-	void		PhoneBookList(void);
-	std::string	TextTraiter(std::string s);
-	// std::string	get_Contact(void);
 };
 
 #endif

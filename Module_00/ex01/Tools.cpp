@@ -6,11 +6,11 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:06:56 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 03:39:33 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:08:39 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AwesomePhoneBook.hpp"
+#include "PhoneBook.hpp"
 
 void	PhoneBook::entry_display()
 {
@@ -38,25 +38,25 @@ int	PhoneBook::check_input(std::string input)
 	
 }
 
-void	PhoneBook::set_Contact(void)
+void	PhoneBook::set_Contact(int index)
 {
 	std::string input;
 	
 	std::cout << "First Name : ";
 	std::cin >> input;
-	PhoneBook::contacts[0].set_FirstName(input);
+	PhoneBook::contacts[index].set_FirstName(input);
 	std::cout << "Last Name : ";
 	std::cin >> input;
-	PhoneBook::contacts[0].set_LastName(input);
+	PhoneBook::contacts[index].set_LastName(input);
 	std::cout << "NickName : ";
 	std::cin >> input;
-	PhoneBook::contacts[0].set_NickName(input);
+	PhoneBook::contacts[index].set_NickName(input);
 	std::cout << "Phone Number : ";
 	std::cin >> input;
-	PhoneBook::contacts[0].set_PhoneNumber(input);
+	PhoneBook::contacts[index].set_PhoneNumber(input);
 	std::cout << "Darkest Secret : ";
 	std::cin >> input;
-	PhoneBook::contacts[0].set_DarkestSecret(input);
+	PhoneBook::contacts[index].set_DarkestSecret(input);
 }
 
 void	PhoneBook::prompt(void)
@@ -67,7 +67,7 @@ void	PhoneBook::prompt(void)
 	std::cout << std::right << std::setw(10) << PhoneBook::contacts[0].get_NickName() << "|" << std::endl;
 }
 
-void	PhoneBook::PhoneBookList(void) /* Use getters to display the corresponding data */
+void	PhoneBook::PhoneBookList(void)
 { 
 	std::cout  << "|-----------*** CONTACT LIST ***------------|" << std::endl;
 	std::cout << "|" << std::right << std::setw(10) << "Index" << "|";
@@ -79,21 +79,22 @@ void	PhoneBook::PhoneBookList(void) /* Use getters to display the corresponding 
 }
 
 
-std::string	PhoneBook::TextTraiter(std::string s)
+void	PhoneBook::TextTraiter(void)
 {
-	if (s.length() > 10)
+	if (PhoneBook::contacts[0].get_FirstName().length() > 10)
 	{
-		s.substr(0, 10);
-		s[9] = '.';
-		std::cout << s << std::endl;
+		std::string temp = PhoneBook::contacts[0].get_FirstName();
+		temp = temp.substr(0, 10);
+		temp[9] = '.';
+		std::cout << temp << std::endl;
+		PhoneBook::contacts[0].set_FirstName(temp);
 	}
-	return (s);
 }
 
-void	PhoneBook::Search(PhoneBook &Book)
+void	PhoneBook::Search(void)
 {
-	Book.PhoneBookList();
-	Book.TextTraiter(Book.contacts->get_FirstName());
+	PhoneBook::TextTraiter();
+	PhoneBook::PhoneBookList();
 }
 
 void	PhoneBook::Exit(void)
