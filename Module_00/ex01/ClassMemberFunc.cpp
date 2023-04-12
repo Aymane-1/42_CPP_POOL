@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 02:45:37 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/07 00:42:42 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/12 03:35:09 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 //-----------------------*** Contact Class member functions ***-----------------------//
 
-void	Contact::get_FirstName(void)
+std::string	Contact::get_FirstName(void)
 {
-	std::cout << Contact::FirstName << std::endl;
+	return Contact::FirstName;
 }
 
-void	Contact::get_LastName(void)
+std::string	Contact::get_LastName(void)
 {
-	std::cout << Contact::LastName << std::endl;
+	return Contact::LastName;
 }
 
-void	Contact::get_NickName(void)
+std::string	Contact::get_NickName(void)
 {
-	std::cout << Contact::NickName << std::endl;
+	return Contact::NickName;
 }
 
-void	Contact::get_PhoneNumber(void)
+std::string	Contact::get_PhoneNumber(void)
 {
-	std::cout << Contact::PhoneNumber << std::endl;
+	return Contact::PhoneNumber;
 }
 
-void	Contact::get_DarkestSecret(void)
+std::string	Contact::get_DarkestSecret(void)
 {
-	std::cout << Contact::DarkestSecret << std::endl;
+	return Contact::DarkestSecret;
 }
 
 void	Contact::set_FirstName(std::string s)
@@ -65,3 +65,13 @@ void	Contact::set_DarkestSecret(std::string s)
 }
 
 //-----------------------*** PhoneBook Class member functions ***-----------------------//
+
+// std::string	PhoneBook::get_Contact(void)
+// {
+// 	return (PhoneBook::contacts[0].get_FirstName());
+// }
+
+// void	PhoneBook::set_Contact(void)
+// {
+// 	PhoneBook::contacts[0].set_FirstName();
+// }
