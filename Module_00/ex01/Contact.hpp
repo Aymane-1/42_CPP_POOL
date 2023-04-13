@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:27:45 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 21:45:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/13 00:44:02 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctype.h>
 #include <iomanip>
 
 class Contact{

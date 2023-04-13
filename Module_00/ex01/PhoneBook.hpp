@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:02:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 21:45:18 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/13 00:49:50 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <iomanip>
+#include <ctype.h>
 #include "Contact.hpp"
 
 class PhoneBook{
@@ -26,13 +27,13 @@ class PhoneBook{
 	public:
 	int			check_input(std::string s);
 	void		entry_display(void);
-	// void		Add(Contact &NewContact);
-	void		Search(void);
+	void		Search(int index);
 	void		Exit(void);
-	void		prompt(void);
+	void		PhoneTable(int index);
+	void		Prompt(int index);
 	void		set_Contact(int index);
-	void		PhoneBookList(void);
-	void		TextTraiter(void);
+	void		PhoneBookList(int index);
+	void		TextTraiter(int index);
 	// std::string	get_Contact(void);
 };
 

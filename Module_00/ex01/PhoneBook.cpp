@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:02:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/12 21:43:59 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:29:28 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,39 @@
 int main()
 {
 	PhoneBook 	Book;
-	int			i;
+	int			index;
 	int			Flag;
 	int			ContactIndex;
 	std::string Input;
 
-	i = 0;
+	index = 0;
 	Flag = 0;
 	ContactIndex = 0;
 	Book.entry_display();
 	while (1)
 	{
-		// system("CLEAR");
-		std::cout << "ENTER A COMMAND :" << std::endl;
+		std::cout << "\e[90;1mENTER A COMMAND :\e[0m" << std::endl;
 		std::cin >> Input;
 		Flag = Book.check_input(Input);
 		if (Flag)
 		{
-			if (i > 7)
-				i = 0;
+			if (index > 8)
+				index = 0;
 			if (Flag == 1)
 			{
-				Book.set_Contact(i);
-				i++;
+				system("CLEAR");
+				index++;
+				Book.set_Contact(index);
 			}
 			if (Flag == 2)
-				Book.Search();
+			{
+				system("CLEAR");
+				Book.Search(index);
+			}
 			if (Flag == 3)
 				Book.Exit();
 		}
+		else
+			std::cout << "\e[94;1mTRY ONE OF THE AVAILABLE COMMANDS!\n\e[32;1m    [ADD]  \e[0m \e[36;1m[SEARCH]  \e[0m \e[31;1m[EXIT]\e[0m\e[0m" << std::endl;
 	}
 }
