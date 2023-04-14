@@ -6,15 +6,16 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 21:59:56 by aechafii          #+#    #+#              #
-#    Updated: 2023/04/12 21:31:45 by aechafii         ###   ########.fr        #
+#    Updated: 2023/04/13 04:45:02 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PhoneBook
 
 SRC =   PhoneBook.cpp \
-		ClassMemberFunc.cpp  \
-		Tools.cpp
+		Contact.cpp \
+		main.cpp
+		
 
 HEADER = PhoneBook.hpp Contact.hpp
 
