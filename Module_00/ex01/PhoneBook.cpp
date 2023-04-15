@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:47:28 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/15 03:21:37 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/15 04:55:05 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int	PhoneBook::check_input(std::string input)
 	
 }
 
-void	PhoneBook::PhoneTable(int index)
+void	PhoneBook::PhoneTable(void)
 {
 	int	i;
 
 	i = 0;
-	(void)index;
 	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
 	{
 			std::cout << "|" << std::right << std::setw(10) << PhoneBook::contacts[i].get_Index() << "|";
@@ -92,14 +91,17 @@ int	PhoneBook::IndexParser(std::string input)
 	return (stoi(input));
 }
 
-void	PhoneBook::Prompt(int index)
+void	PhoneBook::Prompt(void)
 {
 	std::string	input;
-	(void)index;
 	
-	input = "";
 	std::cout << "\e[90;1mINSERT INDEX OF CONTACT:\e[0m ";
-	std::cin >> input;
+	std::getline(std::cin, input);
+	if (std::cin.eof())
+	{
+		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
+		exit (1);
+	}
 	int i = 0;
 	while (1)
 	{
@@ -148,12 +150,12 @@ int	s_digit(std::string input)
 	return (1);
 }
 
-void	PhoneBook::TextTraiter(int index)
+void	PhoneBook::TextTraiter(void)
 {
 	int i;
 
 	i = 0;
-	while (PhoneBook::contacts[i].get_Index() < index)
+	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
 	{
 		if (PhoneBook::contacts[i].get_FirstName().length() > 10)
 		{
@@ -180,13 +182,13 @@ void	PhoneBook::TextTraiter(int index)
 	}
 }
 
-void	PhoneBook::Search(int index)
+void	PhoneBook::Search(void)
 {
-	PhoneBook::TextTraiter(index);
-	PhoneBook::PhoneBookList(index);
+	PhoneBook::TextTraiter();
+	PhoneBook::PhoneBookList();
 }
 
-void	PhoneBook::PhoneBookList(int index)
+void	PhoneBook::PhoneBookList(void)
 {
 	if (PhoneBook::contacts[0].get_FirstName().empty() == false)
 	{
@@ -195,9 +197,9 @@ void	PhoneBook::PhoneBookList(int index)
 		std::cout << std::right << std::setw(10) << "First Name"  << "|";
 		std::cout << std::right << std::setw(10) << "Last Name"  << "|";
 		std::cout << std::right << std::setw(10) << "Nickname"  << "|" << std:: endl;
-		PhoneBook::PhoneTable(index);
+		PhoneBook::PhoneTable();
 		std::cout << "|-------------------------------------------|" << std::endl;
-		PhoneBook::Prompt(index);
+		PhoneBook::Prompt();
 	}
 	else
 		std::cout << "\e[31;1mNO CONTACTS ARE ADDED YET!\e[0m \e[90;1mTRY THE\e[0m \e[32;1m'ADD'\e[0m \e[90;1mCOMMAND.\e[0m" << std::endl;
