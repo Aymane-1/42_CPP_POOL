@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:47:28 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/14 02:51:14 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/15 02:32:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,32 @@ void	PhoneBook::PhoneTable(int index)
 {
 	int	i;
 
-	i = 1;
-	while (i <= index)
+	i = 0;
+	(void)index;
+	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
 	{
-		if (PhoneBook::contacts[index].get_FirstName() != "")
-		{	
-			std::cout << "|" << std::right << std::setw(10) << i << "|";
+			std::cout << "|" << std::right << std::setw(10) << PhoneBook::contacts[i].get_Index() << "|";
 			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_FirstName() << "|";
 			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_LastName() << "|";
 			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_NickName() << "|" << std::endl;
-		}
 		i++;
 	}
 }
 
-int	IndexParser(std::string input, int index)
+int	PhoneBook::FindIndex(int index)
+{
+	int i = 0;
+
+	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
+	{
+		if (PhoneBook::contacts[i].get_Index() == index)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	PhoneBook::IndexParser(std::string input)
 {
 	int	i;
 
@@ -68,45 +79,52 @@ int	IndexParser(std::string input, int index)
 		if (!isdigit(input[i]))
 		{
 			std::cout << "\e[31;1mWRONG INPUT!\e[0m \e[90;1mTRY AGAIN.\e[0m" << std::endl;
-			return (1);
+			return (-1);
 		}
 		i++;
 	}
-	if (stoi(input) > index || stoi(input) < 1)
+	i = stoi(input);
+	if (stoi(input) < 0 || PhoneBook::FindIndex(i) == 0)
 	{
 		std::cout << "\e[31;1mINPUT IS OUT RANGE!\e[0m \e[90;1mTRY AGAIN.\e[0m" << std::endl;
-		return (1);
+		return (-1);
 	}
-	return (0);
+	return (stoi(input));
 }
 
 void	PhoneBook::Prompt(int index)
 {
 	std::string	input;
+	(void)index;
 	
 	input = "";
 	std::cout << "\e[90;1mINSERT INDEX OF CONTACT:\e[0m ";
 	std::cin >> input;
+	int i = 0;
 	while (1)
 	{
-		if (!IndexParser(input, index))
+		if (IndexParser(input) > -1)
 		{
-			if (PhoneBook::contacts[index].get_FirstName() != "")
+			while (PhoneBook::contacts[i].get_FirstName().empty() == false)
 			{
-				std::cout << std::endl;
-				std::cout << "|--**CONTACT  INFO**--|" << std::endl;
-				std::cout << "|---------------------|" << std::endl;
-				std::cout << "|" << std::right << std::setw(10) << "Index" << "|";
-				std::cout << std::right << std::setw(10) << index << "|" << std::endl;
-				std::cout << "|" << std::right << std::setw(10) << "First Name"  << "|";
-				std::cout << std::right << std::setw(10) << PhoneBook::contacts[index].get_FirstName() << "|" << std::endl;
-				std::cout << "|" << std::right << std::setw(10) << "Last Name"  << "|";
-				std::cout << std::right << std::setw(10) << PhoneBook::contacts[index].get_LastName() << "|" << std::endl;
-				std::cout << "|" << std::right << std::setw(10) << "Nickname"  << "|";
-				std::cout << std::right << std::setw(10) << PhoneBook::contacts[index].get_NickName() << "|" << std::endl;
-				std::cout << "|---------------------|" << std::endl;
-				std::cout << std::endl;
-				return ;
+				if (PhoneBook::contacts[i].get_Index() == stoi(input))
+				{
+					std::cout << std::endl;
+					std::cout << "|--**CONTACT  INFO**--|" << std::endl;
+					std::cout << "|---------------------|" << std::endl;
+					std::cout << "|" << std::right << std::setw(10) << "Index" << "|";
+					std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_Index() << "|" << std::endl;
+					std::cout << "|" << std::right << std::setw(10) << "First Name"  << "|";
+					std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_FirstName() << "|" << std::endl;
+					std::cout << "|" << std::right << std::setw(10) << "Last Name"  << "|";
+					std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_LastName() << "|" << std::endl;
+					std::cout << "|" << std::right << std::setw(10) << "Nickname"  << "|";
+					std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_NickName() << "|" << std::endl;
+					std::cout << "|---------------------|" << std::endl;
+					std::cout << std::endl;
+					return ;
+				}
+				i++;
 			}
 		}
 		else
@@ -134,8 +152,8 @@ void	PhoneBook::TextTraiter(int index)
 {
 	int i;
 
-	i = 1;
-	while (i <= index)
+	i = 0;
+	while (PhoneBook::contacts[i].get_Index() < index)
 	{
 		if (PhoneBook::contacts[i].get_FirstName().length() > 10)
 		{
@@ -158,12 +176,12 @@ void	PhoneBook::TextTraiter(int index)
 			temp[9] = '.';
 			PhoneBook::contacts[i].set_NickName(temp);
 		}
-		if (PhoneBook::contacts[i].get_PhoneNumber() % 10)
+		if (PhoneBook::contacts[i].get_PhoneNumber().length() > 10)
 		{
-			int temp = PhoneBook::contacts[i].get_PhoneNumber();
-			temp /= 1000000000;
-			std::cout << temp << std::endl;
-			// PhoneBook::contacts[i].set_PhoneNumber(temp);
+			std::string temp = PhoneBook::contacts[i].get_PhoneNumber();
+			temp = temp.substr(0, 10);
+			temp[9] = '.';
+			PhoneBook::contacts[i].set_PhoneNumber(temp);
 		}
 		if (PhoneBook::contacts[i].get_DarkestSecret().length() > 10)
 		{
@@ -184,7 +202,7 @@ void	PhoneBook::Search(int index)
 
 void	PhoneBook::PhoneBookList(int index)
 {
-	if (PhoneBook::contacts[index].get_FirstName() != "")
+	if (PhoneBook::contacts[0].get_FirstName().empty() == false)
 	{
 		std::cout  << "|-----------*** CONTACT LIST ***------------|" << std::endl;
 		std::cout << "|" << std::right << std::setw(10) << "Index" << "|";
@@ -193,8 +211,6 @@ void	PhoneBook::PhoneBookList(int index)
 		std::cout << std::right << std::setw(10) << "Nickname"  << "|" << std:: endl;
 		PhoneBook::PhoneTable(index);
 		std::cout << "|-------------------------------------------|" << std::endl;
-		sleep(3);
-		system("CLEAR");
 		PhoneBook::Prompt(index);
 	}
 	else
@@ -204,9 +220,9 @@ void	PhoneBook::PhoneBookList(int index)
 void	PhoneBook::set_Contact(int index)
 {
 	std::string input;
-	int			PhoneNumber;
 	
-	std::cout << "---> " << index << std::endl;
+	PhoneBook::contacts[index].set_Index(index);
+	PhoneBook::contacts[index].set_FirstName("");
 	std::cout << "First Name : ";
 	std::cin >> input;
 	PhoneBook::contacts[index].set_FirstName(input);
@@ -217,14 +233,14 @@ void	PhoneBook::set_Contact(int index)
 	std::cin >> input;
 	PhoneBook::contacts[index].set_NickName(input);
 	std::cout << "Phone Number : ";
-	std::cin >> PhoneNumber;
-	if (std::cin.fail() == 1)
+	std::cin >> input;
+	while (!s_digit(input))
 	{
-		std::cout << "PHONE NUMBER MUST BE A DIGIT" << std::endl;
-		std::cin >> PhoneNumber;
-		exit(1) ;
+		std::cout << "\e[31;1mPHONE NUMBER MUST BE A DIGIT!\e[0m" << std::endl;
+		std::cout << "Phone Number : ";
+		std::cin >> input;
 	}
-	PhoneBook::contacts[index].set_PhoneNumber(PhoneNumber);
+	PhoneBook::contacts[index].set_PhoneNumber(input);
 	std::cout << "Darkest Secret : ";
 	std::cin >> input;
 	PhoneBook::contacts[index].set_DarkestSecret(input);

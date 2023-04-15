@@ -17,12 +17,10 @@ int main()
 	PhoneBook 	Book;
 	int			index;
 	int			Flag;
-	// int			ContactIndex;
 	std::string Input;
 
 	index = 0;
 	Flag = 0;
-	// ContactIndex = 0;
 	Book.entry_display();
 	while (1)
 	{
@@ -36,12 +34,11 @@ int main()
 			if (Flag == 1)
 			{
 				system("CLEAR");
-				index++;
 				Book.set_Contact(index);
+				index++;
 			}
 			if (Flag == 2)
 			{
-				system("CLEAR");
 				Book.Search(index);
 			}
 			if (Flag == 3)
