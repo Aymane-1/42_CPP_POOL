@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:47:28 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/15 04:55:05 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:33:48 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	PhoneBook::Prompt(void)
 		else
 		{
 			std::cout << "\e[90;1mINSERT INDEX OF CONTACT:\e[0m ";
-			std::cin >> input;
+			std::getline(std::cin, input);
 		}
 	}
 }
@@ -212,7 +212,7 @@ void	PhoneBook::set_Contact(int index)
 	PhoneBook::contacts[index].set_Index(index);
 	PhoneBook::contacts[index].set_FirstName("");
 	std::cout << "First Name : ";
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 	{
 		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
@@ -220,7 +220,7 @@ void	PhoneBook::set_Contact(int index)
 	}
 	PhoneBook::contacts[index].set_FirstName(input);
 	std::cout << "Last Name : ";
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 	{
 		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
@@ -228,7 +228,7 @@ void	PhoneBook::set_Contact(int index)
 	}
 	PhoneBook::contacts[index].set_LastName(input);
 	std::cout << "NickName : ";
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 	{
 		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
@@ -236,7 +236,7 @@ void	PhoneBook::set_Contact(int index)
 	}
 	PhoneBook::contacts[index].set_NickName(input);
 	std::cout << "Phone Number : ";
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 	{
 		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
@@ -250,7 +250,7 @@ void	PhoneBook::set_Contact(int index)
 	}
 	PhoneBook::contacts[index].set_PhoneNumber(input);
 	std::cout << "Darkest Secret : ";
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 	{
 		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
