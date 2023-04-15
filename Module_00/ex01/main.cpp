@@ -26,6 +26,11 @@ int main()
 	{
 		std::cout << "\e[90;1mENTER A COMMAND :\e[0m" << std::endl;
 		std::cin >> Input;
+		if (std::cin.eof())
+		{
+			std::cout << "\e[31;1mPHONEBOOK CLOSED.\e[0m" << std::endl;
+			exit (1);
+		}
 		Flag = Book.check_input(Input);
 		if (Flag)
 		{
