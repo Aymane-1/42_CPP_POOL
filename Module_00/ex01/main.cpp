@@ -25,7 +25,7 @@ int main()
 	while (1)
 	{
 		std::cout << "\e[90;1mENTER A COMMAND :\e[0m" << std::endl;
-		std::cin >> Input;
+		std::getline(std::cin, Input);
 		if (std::cin.eof())
 		{
 			std::cout << "\e[31;1mPHONEBOOK CLOSED.\e[0m" << std::endl;
@@ -44,12 +44,15 @@ int main()
 			}
 			if (Flag == 2)
 			{
-				Book.Search(index);
+				Book.Search();
 			}
 			if (Flag == 3)
 				exit(1);
 		}
 		else
+		{
+			system("CLEAR");
 			std::cout << "\e[94;1mTRY ONE OF THE AVAILABLE COMMANDS!\n\e[32;1m    [ADD]  \e[0m \e[36;1m[SEARCH]  \e[0m \e[31;1m[EXIT]\e[0m\e[0m" << std::endl;
+		}
 	}
 }

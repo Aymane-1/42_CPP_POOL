@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:02:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/15 02:24:31 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:43:27 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 
 class PhoneBook{
 	private:
-	Contact contacts[9];
+		Contact contacts[8];
 	public:
-	int			check_input(std::string s);
-	void		entry_display(void);
-	void		Search(int index);
-	void		PhoneTable(int index);
-	void		Prompt(int index);
-	void		set_Contact(int index);
-	void		PhoneBookList(int index);
-	void		TextTraiter(int index);
-	int			FindIndex(int index);
-	int			IndexParser(std::string input);
+		int			check_input(std::string s);
+		void		entry_display(void);
+		void		Search(void);
+		void		PhoneTable(void);
+		void		Prompt(void);
+		void		set_Contact(int index);
+		void		PhoneBookList(void);
+		void		TextTraiter(void);
+		int			FindIndex(int index);
+		int			IndexParser(std::string input);
 };
 
 #endif

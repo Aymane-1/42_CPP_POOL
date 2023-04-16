@@ -6,26 +6,26 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:47:28 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/15 17:33:48 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/15 23:31:25 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-//-----------------------*** PhoneBook Class member functions ***-----------------------//
+
 
 void	PhoneBook::entry_display()
 {
 		std::cout << "\e[36;1m---------------- WELCOME TO THE 80'S CRAPPY PHONEBOOK ----------------\e[0m" << std::endl;
-		// sleep(1);
+		sleep(1);
 		std::cout << "\e[90;1;3;4mAVAILABLE COMMANDS ARE:\e[0m" << std::endl;
-		// sleep(1);
+		sleep(1);
 		std::cout << "--> \e[32;1mADD\e[0m" << std::endl;
-		// sleep(1);
+		sleep(1);
 		std::cout << "--> \e[36;1mSEARCH\e[0m" << std::endl;
-		// sleep(1);
+		sleep(1);
 		std::cout << "--> \e[31;1mEXIT\e[0m" << std::endl;
-		// sleep(1);
+		sleep(1);
 }
 
 int	PhoneBook::check_input(std::string input)
@@ -42,15 +42,14 @@ int	PhoneBook::check_input(std::string input)
 
 void	PhoneBook::PhoneTable(void)
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
-	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
+	while (i <= 7 && PhoneBook::contacts[i].get_FirstName().empty() == false)
 	{
-			std::cout << "|" << std::right << std::setw(10) << PhoneBook::contacts[i].get_Index() << "|";
-			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_FirstName() << "|";
-			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_LastName() << "|";
-			std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_NickName() << "|" << std::endl;
+		std::cout << "|" << std::right << std::setw(10) << PhoneBook::contacts[i].get_Index() << "|";
+		std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_FirstName() << "|";
+		std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_LastName() << "|";
+		std::cout << std::right << std::setw(10) << PhoneBook::contacts[i].get_NickName() << "|" << std::endl;
 		i++;
 	}
 }
@@ -73,6 +72,11 @@ int	PhoneBook::IndexParser(std::string input)
 	int	i;
 
 	i = 0;
+	if (input.empty() == true || input.length() > 2)
+	{
+		std::cout << "\e[31;1mWRONG INPUT!\e[0m \e[90;1mTRY AGAIN.\e[0m" << std::endl;
+		return (-1);
+	}
 	while (input[i])
 	{
 		if (!isdigit(input[i]))
@@ -107,7 +111,7 @@ void	PhoneBook::Prompt(void)
 	{
 		if (IndexParser(input) > -1)
 		{
-			while (PhoneBook::contacts[i].get_FirstName().empty() == false)
+			while (i <= 7 && PhoneBook::contacts[i].get_FirstName().empty() == false)
 			{
 				if (PhoneBook::contacts[i].get_Index() == stoi(input))
 				{
@@ -155,7 +159,7 @@ void	PhoneBook::TextTraiter(void)
 	int i;
 
 	i = 0;
-	while (PhoneBook::contacts[i].get_FirstName().empty() == false)
+	while (i <= 7 && PhoneBook::contacts[i].get_FirstName().empty() == false)
 	{
 		if (PhoneBook::contacts[i].get_FirstName().length() > 10)
 		{
@@ -205,57 +209,54 @@ void	PhoneBook::PhoneBookList(void)
 		std::cout << "\e[31;1mNO CONTACTS ARE ADDED YET!\e[0m \e[90;1mTRY THE\e[0m \e[32;1m'ADD'\e[0m \e[90;1mCOMMAND.\e[0m" << std::endl;
 }
 
+std::string	parse(std::string fieldName)
+{
+	std::string input;
+	if (fieldName == "Phone Number : ")
+	{
+		std::cout << fieldName;
+		std::getline(std::cin, input);
+		while (!s_digit(input) || input.empty() == true)
+		{
+			std::cout << "\e[31;1mPHONE NUMBER MUST BE A DIGIT!\e[0m" << std::endl;
+			std::cout << "Phone Number : ";
+			std::getline(std::cin, input);
+			if (std::cin.eof())
+			{
+				std::cout << "\n\e[31;1mNO FIELD SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
+				exit (1);
+			}
+		}
+	}
+	else
+	{
+		while (1)
+		{
+			std::cout << fieldName;
+			std::getline(std::cin, input);
+			if (std::cin.eof())
+			{
+				std::cout << "\e[31;1mNO FIELD SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
+				exit (1);
+			}
+			if (input.empty() == true)
+				std::cout << "\e[31;1mNO FIELD SHOULD BE EMPTY!\e[0m" << std::endl;
+			else
+				break ;
+		}
+	}
+	return input;
+}
+
 void	PhoneBook::set_Contact(int index)
 {
 	std::string input;
 	
 	PhoneBook::contacts[index].set_Index(index);
-	PhoneBook::contacts[index].set_FirstName("");
-	std::cout << "First Name : ";
-	std::getline(std::cin, input);
-	if (std::cin.eof())
-	{
-		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
-		exit (1);
-	}
-	PhoneBook::contacts[index].set_FirstName(input);
-	std::cout << "Last Name : ";
-	std::getline(std::cin, input);
-	if (std::cin.eof())
-	{
-		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
-		exit (1);
-	}
-	PhoneBook::contacts[index].set_LastName(input);
-	std::cout << "NickName : ";
-	std::getline(std::cin, input);
-	if (std::cin.eof())
-	{
-		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
-		exit (1);
-	}
-	PhoneBook::contacts[index].set_NickName(input);
-	std::cout << "Phone Number : ";
-	std::getline(std::cin, input);
-	if (std::cin.eof())
-	{
-		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
-		exit (1);
-	}
-	while (!s_digit(input))
-	{
-		std::cout << "\e[31;1mPHONE NUMBER MUST BE A DIGIT!\e[0m" << std::endl;
-		std::cout << "Phone Number : ";
-		std::cin >> input;
-	}
-	PhoneBook::contacts[index].set_PhoneNumber(input);
-	std::cout << "Darkest Secret : ";
-	std::getline(std::cin, input);
-	if (std::cin.eof())
-	{
-		std::cout << "\n\e[31;1mNO FIELDS SHOULD BE EMPTY! RELAUNCH THE PHONEBOOK.\e[0m" << std::endl;
-		exit (1);
-	}
-	PhoneBook::contacts[index].set_DarkestSecret(input);
+	PhoneBook::contacts[index].set_FirstName(parse("First Name : "));
+	PhoneBook::contacts[index].set_LastName(parse("Last Name : "));
+	PhoneBook::contacts[index].set_NickName(parse("Nick Name : "));
+	PhoneBook::contacts[index].set_PhoneNumber(parse("Phone Number : "));
+	PhoneBook::contacts[index].set_DarkestSecret(parse("Darkest Secret : "));
 	system("CLEAR");
 }

@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:45:14 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/03 21:52:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/04 00:04:01 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 int main(int argc, char **argv)
 {
 	if (argc < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+	{	
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+		std::cout << std::endl;
+	}
 	else
 	{
-		std::string input;
 		int i, j;
+		std::string input;
 
 		i = 1;
 		while (argv[i])
@@ -37,4 +40,5 @@ int main(int argc, char **argv)
 		}
 		std::cout << std::endl;
 	}
+	return (0);
 }
