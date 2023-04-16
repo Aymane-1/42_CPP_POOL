@@ -6,15 +6,18 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 02:30:30 by aechafii          #+#    #+#              #
-#    Updated: 2023/04/16 02:32:25 by aechafii         ###   ########.fr        #
+#    Updated: 2023/04/16 23:01:41 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Braiiiinnnzzz
 
-SRC =   main.cpp
+SRC =   main.cpp \
+		Zombie.cpp \
+		newZombie.cpp \
+		randomChump.cpp
 		
-HEADER = 
+HEADER = Zombie.hpp
 
 OBJ = $(SRC:.c=.o)
 
