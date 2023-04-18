@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 01:04:25 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/18 02:14:02 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/18 02:24:17 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ HumanB::HumanB(std::string name)
 
 void	HumanB::attack()
 {
-	std::cout << HumanB::name << " attacks with their " << this->weapon->getType() << std::endl;
+	if (this->weapon)
+		std::cout << HumanB::name << " attacks with their " << this->weapon->getType() << std::endl;
 }
 
 void    HumanB::setWeapon(Weapon &tool)
