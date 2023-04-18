@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 00:33:00 by aechafii          #+#    #+#              #
-#    Updated: 2023/04/17 02:56:13 by aechafii         ###   ########.fr        #
+#    Updated: 2023/04/18 02:08:56 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADER = Weapon.hpp \
 		 HumanA.hpp \
 		 HumanB.hpp
 		
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.cpp=.o)
 
 CC = c++
 
@@ -32,10 +32,13 @@ all:$(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
 	
-%.o:%.c 
+%.o:%.cpp $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-fclean:
+clean:
+	rm -rf $(OBJ)
+
+fclean: clean
 	rm -rf $(NAME) 
 
 re: fclean all 
