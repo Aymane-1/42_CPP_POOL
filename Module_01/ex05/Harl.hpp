@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:47:58 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/19 02:54:10 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:32:25 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ class Harl{
 		void	complain(std::string level);
 };
 
-typedef void(Harl::*funcPtr)(std::string);
+typedef void(Harl::*funcPtr)(void);
 
 #endif
