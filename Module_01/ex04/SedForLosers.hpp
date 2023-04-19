@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 02:29:39 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/18 23:26:35 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:37:40 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+
+std::string generateOutfileName(std::string fileName)
+{
+	return (fileName + ".replace");
+}
 
 std::string	replaceOccurrence(std::string buffer, std::string s1, std::string s2)
 {
