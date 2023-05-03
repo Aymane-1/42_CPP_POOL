@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 11:22:29 by aymane            #+#    #+#             */
-/*   Updated: 2023/05/01 19:23:02 by aechafii         ###   ########.fr       */
+/*   Created: 2023/04/27 18:06:29 by aechafii          #+#    #+#             */
+/*   Updated: 2023/04/28 20:24:40 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Fixed{
 		static const int	bits = 8;
 	public:
 		Fixed();
-		Fixed(const int integer);
+		Fixed(const int number);
 		Fixed(const float number);
 		Fixed(const Fixed &obj); // copy constructor
 		Fixed &operator=(const Fixed &obj); // copy assignement
@@ -32,6 +32,25 @@ class Fixed{
 		float	toFloat(void) const;
 		int		toInt(void) const;
 		~Fixed();
+		bool    operator>(const Fixed &obj);
+        bool    operator<(const Fixed &obj);
+        bool    operator>=(const Fixed &obj);
+        bool    operator<=(const Fixed &obj);
+        bool    operator==(const Fixed &obj);
+        bool    operator!=(const Fixed &obj);
+        Fixed   operator+(const Fixed &obj);
+        Fixed   operator-(const Fixed &obj);
+        Fixed   operator*(const Fixed &obj);
+        Fixed   operator/(const Fixed &obj);
+        Fixed   operator++(void);
+        Fixed   operator++(int);
+        Fixed   operator--(void);
+        Fixed   operator--(int);
+        static  Fixed &min(Fixed &number1, Fixed &number2);
+        static  Fixed &min(const Fixed &number1, const Fixed &number2);
+        static  Fixed &max(Fixed &number1, Fixed &number2);
+        static  Fixed &max(const Fixed &number1, const Fixed &number2);
+	private:
 };
 
 std::ostream &operator << (std::ostream &out, const Fixed &obj);

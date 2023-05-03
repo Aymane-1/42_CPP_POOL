@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 23:57:27 by aechafii          #+#    #+#             */
-/*   Updated: 2023/04/27 11:11:21 by aymane           ###   ########.fr       */
+/*   Updated: 2023/05/01 19:34:48 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed(void)
+Fixed::Fixed()
 {
 	std::cout << "Default constructor called" << std::endl;
 	this->FixedVal = 0;
@@ -26,7 +26,7 @@ Fixed::Fixed(const Fixed &obj)
 
 Fixed &Fixed::operator=(const Fixed &obj)
 {
-	std::cout << "Copy assingment operator called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &obj)
 		this->FixedVal = obj.getRawBits();
 	return *this;
