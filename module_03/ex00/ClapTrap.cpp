@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:19:51 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/05 15:41:25 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/07 22:07:54 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->EnergyPoints)
 	{
-		std::cout << "ClapTrap "  << this->name << " is repairing " << amount << " of hit points back ."<< std::endl;
+		std::cout << "ClapTrap "  << this->name << " is regenerating " << amount << " of HitPoints back."<< std::endl;
 		this->HitPoints += amount;
 		this->EnergyPoints -= 1;
 	}
