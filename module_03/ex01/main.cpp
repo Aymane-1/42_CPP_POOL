@@ -6,7 +6,7 @@
 /*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:16 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/07 22:46:38 by aymane           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:42:43 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,5 @@ int main(void)
 	Warrior.takeDamage(3);
 	std::cout <<  Warrior.GetClpTrpName() <<  " HitPoints are " << Warrior.GetClpTrpHitPoints() << std::endl;
 	Warrior.beRepaired(3);
-	std::cout <<  Warrior.GetClpTrpName() <<  " HitPoints are " << Warrior.GetClpTrpHitPoints() << std::endl;
-	Warrior.takeDamage(10);
-	Warrior.takeDamage(1);
+	std::cout <<  Warrior.GetClpTrpName() << " EnergyPoints are " << Warrior.GetClpTrpHitPoints() << std::endl;
 }

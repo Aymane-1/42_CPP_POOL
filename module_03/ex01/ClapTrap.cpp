@@ -6,7 +6,7 @@
 /*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:19:51 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/07 22:40:30 by aymane           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:41:14 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,5 @@ int	ClapTrap::GetClpTrpAttackDamage(void) const
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap Destructor called" << std::endl;
+	std::cout << "ClapTrap destructor called" << std::endl;
 }
