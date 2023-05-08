@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 16:12:58 by aechafii          #+#    #+#              #
-#    Updated: 2023/05/08 13:26:38 by aechafii         ###   ########.fr        #
+#    Updated: 2023/05/08 15:05:02 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME = App
 
 SRC =   main.cpp \
 		ClapTrap.cpp  \
-		ScavTrap.cpp
+		ScavTrap.cpp \
+		FragTrap.cpp
 		
-HEADER = ClapTrap.hpp ScavTrap.hpp
+HEADER = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 		
 OBJ = $(SRC:.cpp=.o)
 

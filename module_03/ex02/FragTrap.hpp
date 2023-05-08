@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 11:51:16 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/08 14:59:30 by aechafii         ###   ########.fr       */
+/*   Created: 2023/05/08 15:06:07 by aechafii          #+#    #+#             */
+/*   Updated: 2023/05/08 15:10:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-int main(void)
-{
-	// ClapTrap Warrior("Napoleon");
-	ScavTrap Lord("Genkhis khan");
-	Lord.attack("Soldier");
-	std::cout << Lord.GetClpTrpName() << " EnergyPoints are: " << Lord.GetClpTrpEnergyPoints() << std::endl;
-	Lord.guardGate();
-}
+#include "ClapTrap.hpp"
+
+class FragTrap : public ClapTrap{
+	public:
+		FragTrap();
+		FragTrap(std::string name);
+		FragTrap(const FragTrap &obj);
+		FragTrap	&operator=(const FragTrap &obj);
+		void	highFiveGuys(void);
+		~FragTrap();
+	
+};
+#endif
