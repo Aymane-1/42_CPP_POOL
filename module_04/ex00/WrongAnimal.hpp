@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:14:47 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/09 15:25:05 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:08:11 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ class WrongAnimal {
 	public:
 		WrongAnimal();
 		WrongAnimal(std::string	name);
-		// WrongAnimal(const WrongAnimal &obj);
-		// WrongAnimal	&operator=(const WrongAnimal &obj);
-		// virtual void	makeSound() const;
+		WrongAnimal(const WrongAnimal &obj);
+		WrongAnimal	&operator=(const WrongAnimal &obj);
+		std::string	getType(void) const;
+		void		setType(std::string name);
+		void	makeSound(void) const;
 		virtual ~WrongAnimal();
 };
 
