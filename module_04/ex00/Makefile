@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 16:22:03 by aechafii          #+#    #+#              #
-#    Updated: 2023/05/08 16:22:54 by aechafii         ###   ########.fr        #
+#    Updated: 2023/05/09 14:20:19 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ NAME = App
 SRC =   main.cpp \
 		Animal.cpp \
 		Dog.cpp \
-		Cat.cpp
+		Cat.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp
 		
-HEADER = Animal.hpp Dog.hpp Cat.hpp
+HEADER = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
 		
 OBJ = $(SRC:.cpp=.o)
 

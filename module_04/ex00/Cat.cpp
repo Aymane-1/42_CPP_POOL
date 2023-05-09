@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:51:16 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/08 21:12:55 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:25:06 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------*** Constructors ***-------------------------
 
-Cat::Cat()
+Cat::Cat() : Animal("Cat")
 {
 	std::cout << "Cat default constructor called" << std::endl;
 }
@@ -46,11 +46,14 @@ Cat	&Cat::operator=(const Cat &obj)
 
 //------------------------------*** Member functions ***------------------------------
 
-
+void	Cat::makeSound(void) const
+{
+	std::cout << "Miaaw!" << std::endl;
+}
 
 //------------------------------*** Destructor ***------------------------------
 
 Cat::~Cat()
 {
-	std::cout << "Cat default destructor called" << std::endl;
+	std::cout << "Cat destructor called" << std::endl;
 }

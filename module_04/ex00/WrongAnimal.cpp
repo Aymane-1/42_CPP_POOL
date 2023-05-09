@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 20:50:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/09 13:15:27 by aechafii         ###   ########.fr       */
+/*   Created: 2023/05/09 14:20:36 by aechafii          #+#    #+#             */
+/*   Updated: 2023/05/09 15:24:30 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-#define CAT_HPP
+#include "WrongAnimal.hpp"
 
-#include "Animal.hpp"
+WrongAnimal::WrongAnimal()
+{
+	std::cout << "WrongAnimal default constructor called" << std::endl;
+	this->type = "Centipede";
+}
 
-class Cat: public Animal{
-	public:
-		Cat();
-		Cat(std::string name);
-		Cat(const Cat &obj);
-		Cat	&operator=(const Cat &obj);
-		void	makeSound() const;
-		~Cat();
-};
+WrongAnimal::WrongAnimal(std::string name)
+{
+	std::cout << "WrongAnimal parametrized constructor called" << std::endl;
+	this->type = name;
+}
 
-#endif
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << "WrongAnimal destructor called." << std::endl;
+}

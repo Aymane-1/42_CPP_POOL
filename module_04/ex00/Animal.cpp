@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:23:37 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/08 21:07:10 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:25:36 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 Animal::Animal()
 {
 	std::cout << "Animal default constructor called" << std::endl;
+	this->type = "Some unknown species";
 }
 
 Animal::Animal(std::string type)
@@ -45,7 +46,7 @@ Animal	&Animal::operator=(const Animal &obj)
 
 //-------------------------------*** Accessors ***------------------------------
 
-std::string	Animal::getType(void)
+std::string	Animal::getType(void) const
 {
 	return (this->type);
 }
@@ -55,12 +56,9 @@ void	Animal::setType(std::string name)
 	this->type = name;
 }
 
-void	Animal::makeSound(void)
+void	Animal::makeSound(void) const
 {
-	if (this->type == "Dog")
-		std::cout << "Woof Woof!" << std::endl;
-	else if (this->type == "Cat")
-		std::cout << "Miaaw!" << std::endl;
+	std::cout << "Some weird unbearable sounds from an unknown species..." << std::endl;
 }
 
 

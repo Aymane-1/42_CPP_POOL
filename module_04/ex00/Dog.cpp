@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:41:07 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/08 21:12:23 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:24:34 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------*** Constructors ***-------------------------
 
-Dog::Dog()
+Dog::Dog() : Animal("Dog")
 {
 	std::cout << "Dog default constructor called" << std::endl;
 }
@@ -25,7 +25,7 @@ Dog::Dog(std::string name)
 	if (name == "Dog")
 		this->type = name;
 	else
-		this->type = "Some kinda specie...";
+		this->type = "Some kinda species...Goblins, maybe?";
 }
 
 //--------------------------------*** Copy constructor ***----------------------
@@ -48,9 +48,14 @@ Dog	&Dog::operator=(const Dog &obj)
 
 //------------------------------*** Member functions ***------------------------------
 
+void	Dog::makeSound(void) const
+{
+	std::cout << "Woof Woof!" << std::endl;
+}
+
 //------------------------------*** Destructor ***------------------------------
 
 Dog::~Dog()
 {
-	std::cout << "Dog default destructor called" << std::endl;
+	std::cout << "Dog destructor called" << std::endl;
 }
