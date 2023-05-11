@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:51:16 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/10 17:30:30 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:34:44 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ Cat	&Cat::operator=(const Cat &obj)
 	if (this != &obj)
 	{
 		this->type = obj.type;
+		delete this->brain;
 		this->brain = new Brain();
+		*(this->brain) = *(obj.brain);
 	}
 	return (*this);
 }
