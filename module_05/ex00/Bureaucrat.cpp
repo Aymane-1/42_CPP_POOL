@@ -6,29 +6,24 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:05 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/12 21:42:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:51:41 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : name("SomeCorruptOfficial"), grade(150)
 {
-	std::cout << "Bureaucrat default constructor called." << std::endl;
-	this->grade = 1;
-	try
-	{
-		if (this->grade < 1 || this->grade > 150)
-			throw this->grade;
-	}
-	catch(int grade)
-	{
-		std::cout << "Too high / Too low\n";
-		if (grade < 1)
-			this->GradeTooHighException();
-		else if (grade > 150)
-			this->GradeTooLowException();
-	}
+	std::cout << "Bureaucrat " << name <<  " default constructor called." << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const std::string &namee, int gradee) : name(namee) , grade(gradee)
+{
+	std::cout << name << " Bureaucrat parametrized constructor called." << std::endl;
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj)
@@ -48,18 +43,37 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
 	return (*this);
 }
 
-void	Bureaucrat::GradeTooHighException()
+std::string	Bureaucrat::getName()
 {
-	std::cout << "GradeTooHigh!" << std::endl;
+	return (this->name);
 }
 
-void	Bureaucrat::GradeTooLowException()
+int	Bureaucrat::getGrade()
 {
-	std::cout << "GradeTooLow!" << std::endl;
+	return (grade);
 }
-,
+
+void	Bureaucrat::IncrementGrade()
+{
+	grade -= 1;
+	if (grade < 1)
+		throw GradeTooHighException();
+}
+
+void	Bureaucrat::DecrementGrade()
+{
+	grade += 1;
+	if (grade > 150)
+		throw GradeTooLowException();
+}
+
+std::ostream	&operator<<(std::ostream &out, Bureaucrat &obj)
+{
+	std::cout << obj.getName() << ", bureaucrat grade is " << obj.getGrade() << std::endl;
+	return out;
+}
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat destructor called." << std::endl;
+	std::cout << "Bureaucrat " << name << " destructor called." << std::endl;
 }
