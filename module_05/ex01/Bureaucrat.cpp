@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:05 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/14 21:54:11 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:29:06 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,12 @@ void	Bureaucrat::signForm(Form &obj)
 	try
 	{
 		obj.beSigned(*this);
-		std::cout << name << " signed " << obj.getName() << std::endl;
+		std::cout << name << " signed " << obj.getName() << " form." << std::endl;
 	}
 	catch (std::exception & e)
 	{
-		std::cout << name << " couldn't sign " << obj.getName() << " because " << e.what() << std::endl;
+		std::cout << name << " couldn't sign " << obj.getName() << " form, because " << e.what() << std::endl;
 	}
-		
 }
 
 std::ostream	&operator<<(std::ostream &out, Bureaucrat &obj)

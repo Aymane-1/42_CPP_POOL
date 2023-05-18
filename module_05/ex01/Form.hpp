@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:00:57 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/14 21:47:49 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:26:19 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class Form{
 				}
 		};
 		Form();
-		Form(const std::string &namee, bool ssigned, const int GradeToSign, const int GradeToExec);
+		Form(const std::string &namee, const int GradeToSign, const int GradeToExec);
 		Form(const Form &obj);
 		Form &operator=(const Form &obj);
 		std::string	getName();
@@ -50,6 +50,6 @@ class Form{
 		~Form();
 };
 
-std::ostream &operator << (std::ostream &out, Form &obj);
+std::ostream &operator<<(std::ostream &out, Form &obj);
 
 #endif
