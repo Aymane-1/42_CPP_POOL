@@ -6,13 +6,13 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 16:47:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 21:11:48 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:23:22 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm():name("SomeRandomDocument"), gradeToSign(150),gradeToExec(150)
+AForm::AForm(): name("SomeRandomDocument"), gradeToSign(150),gradeToExec(150)
 {
 	std::cout << "AForm default constructor called." << std::endl;
 }
@@ -26,7 +26,7 @@ AForm::AForm(const std::string &namee, const int GradeToSign, const int GradeToE
 		throw GradeTooHighException();
 }
 
-AForm::AForm(const AForm &obj):name(obj.name), gradeToSign(obj.gradeToSign) ,gradeToExec(obj.gradeToExec)
+AForm::AForm(const AForm &obj): name(obj.name), gradeToSign(obj.gradeToSign) ,gradeToExec(obj.gradeToExec)
 {
 	if (gradeToSign > 150 || gradeToExec > 150)
 		throw GradeTooLowException();

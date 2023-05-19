@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:00:57 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 21:24:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:40:03 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ class AForm{
 		int			getGradeToSign();	
 		int			getGradeToExec();	
 		void		beSigned(Bureaucrat &obj);
-		virtual ~AForm() = 0;
+		virtual void		execute(Bureaucrat const &executor) const = 0;
+		~AForm();
 };
 
 std::ostream &operator<<(std::ostream &out, AForm &obj);

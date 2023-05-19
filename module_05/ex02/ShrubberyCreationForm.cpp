@@ -6,22 +6,23 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:50:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 21:34:30 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:00:02 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): target("fileName")
+ShrubberyCreationForm::ShrubberyCreationForm(): target("file")
 {
-	std::cout << "ShruberryCreationForm default constructor called" << std::endl;
+	std::cout << "ShruberryCreationForm default constructor called." << std::endl;
 }
 
-// ShrubberyCreationForm::ShrubberyCreationForm()
-// {
-// 	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;
-// }
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : target(name)
+{
+	std::cout << "Shrubbery parametrized constructor called." << std::endl;
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj)
 {
@@ -41,22 +42,31 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat &executor) const
+void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	if (executor.getGrade())
-	std::cout << "         *" << std::endl;
-	std::cout << "        **" << std::endl;
-	std::cout << "       ****" << std::endl;
-	std::cout << "      ******" << std::endl;
-	std::cout << "     ********" << std::endl;
-	std::cout << "    **********" << std::endl;
-	std::cout << "   ************" << std::endl;
-	std::cout << "  **************" << std::endl;
-	std::cout << " ****************" << std::endl;
-	std::cout << "******************" << std::endl;
-	std::cout << "        ||        " << std::endl;
-	std::cout << "        --        " << std::endl;
-	std::cout << "------------------" << std::endl;
+	(void)executor;
+	std::fstream file;
+	file.open((target + "_shrubbery"), std::ios::out);
+	if (!file.is_open())
+	{
+		std::cout << "Error! couldn't open file.";
+		exit(1);
+	}
+	file << "          " << std::endl;
+	file << "         *" << std::endl;
+	file << "        **" << std::endl;
+	file << "       ****" << std::endl;
+	file << "      ******" << std::endl;
+	file << "     ********" << std::endl;
+	file << "    **********" << std::endl;
+	file << "   ************" << std::endl;
+	file << "  **************" << std::endl;
+	file << " ****************" << std::endl;
+	file << "******************" << std::endl;
+	file << "        ||        " << std::endl;
+	file << "        --        " << std::endl;
+	file << "------------------" << std::endl;
+	file.close();
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

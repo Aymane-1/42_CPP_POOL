@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:45:35 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 20:48:04 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:56:21 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ class Bureaucrat{
 		void		IncrementGrade();
 		void		DecrementGrade();
 		void		signForm(AForm &obj);
+		// void		executeForm(AForm  &form);
 		~Bureaucrat();
 };
 
