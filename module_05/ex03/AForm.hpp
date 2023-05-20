@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:00:57 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 19:04:57 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:56:44 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,27 @@ class AForm{
 					return ("GradeTooLow!");
 				}
 		};
+		class FormUnsignedException:public std::exception
+		{
+			public:
+				const char * what() const throw()
+				{
+					return ("The Form is unsigned!");
+				}
+		};
 		AForm();
 		AForm(const std::string &namee, const int GradeToSign, const int GradeToExec);
 		AForm(const AForm &obj);
-		AForm &operator=(const AForm &obj);
-		std::string	getName();
-		bool		getSignedState();
-		int			getGradeToSign();	
-		int			getGradeToExec();	
-		void		beSigned(Bureaucrat &obj);
-		virtual void		execute(Bureaucrat const &executor) const = 0;
+		AForm			&operator=(const AForm &obj);
+		std::string		getName() const;
+		bool			getSignedState() const;
+		int				getGradeToSign() const;	
+		int				getGradeToExec() const;	
+		void			beSigned(Bureaucrat &obj);
+		virtual void	execute(Bureaucrat const &executor) const = 0;
 		~AForm();
 };
 
-std::ostream &operator<<(std::ostream &out, AForm &obj);
+std::ostream	&operator<<(std::ostream &out, AForm &obj);
 
 #endif

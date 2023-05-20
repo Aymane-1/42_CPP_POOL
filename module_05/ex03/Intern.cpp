@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:07:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 19:56:30 by aechafii         ###   ########.fr       */
+/*   Created: 2023/05/20 21:01:48 by aechafii          #+#    #+#             */
+/*   Updated: 2023/05/20 21:10:01 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,19 @@ Intern::Intern()
 	std::cout << "Intern default constructor called." << std::endl;
 }
 
-Intern::Intern(Intern &obj)
+Intern::Intern(const Intern &obj)
 {
 	*this = obj;
 }
 
 Intern	&Intern::operator=(const Intern &obj)
 {
-	if (this != &obj)
-	{
-		;
-	}
-	return (*this);
+	std::cout << "Intern copy assingnment called." << std::endl;
 }
 
-AForm	*makeForm(std::string formName, std::string	formTarget)
+Form	Intern::makeForm(std::string formName, std::string formTarget)
 {
-	
-	std::cout << "Intern creates " <<  "" << std::endl;
+	std::cout << "Intern creates " << formName << std::endl;
 }
 
 Intern::~Intern()

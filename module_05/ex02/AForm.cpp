@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 16:47:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 14:23:22 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:43:48 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,22 @@ std::ostream	&operator<<(std::ostream &output, AForm &obj)
 	return (output);
 }
 
-std::string	AForm::getName()
+std::string	AForm::getName() const
 {
 	return (name);
 }
 
-bool	AForm::getSignedState(void)
+bool	AForm::getSignedState(void) const
 {
 	return (Signed);	
 }
 
-int	AForm::getGradeToSign(void)
+int	AForm::getGradeToSign(void) const
 {
 	return (gradeToSign);
 }
 
-int	AForm::getGradeToExec(void)
+int	AForm::getGradeToExec(void) const
 {
 	return (gradeToExec);
 }

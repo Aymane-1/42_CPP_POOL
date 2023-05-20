@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:50:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 16:00:02 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:45:56 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): target("file")
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyForm", 145, 137)
 {
 	std::cout << "ShruberryCreationForm default constructor called." << std::endl;
+	target = "file";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : target(name)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name)
 {
+	target = name;
+	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string namee, std::string targett, int toSign, int toExec) \
+: AForm(namee, toSign, toExec)
+{
+	target = targett;
 	std::cout << "Shrubbery parametrized constructor called." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj):AForm(obj.getName(), 145, 137)
 {
 	*this = obj;
-	if (getGradeToSign() > 150 || getGradeToExec() > 150)
-		throw GradeTooHighException();
-	else if (getGradeToExec() < 1 || getGradeToExec() < 1)
-		throw GradeTooLowException();
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &obj)
@@ -44,7 +49,10 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	(void)executor;
+	if (!this->getSignedState())
+		throw FormUnsignedException();
+	else if (executor.getGrade() > this->getGradeToExec())
+		throw	GradeTooLowException();
 	std::fstream file;
 	file.open((target + "_shrubbery"), std::ios::out);
 	if (!file.is_open())
@@ -67,6 +75,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file << "        --        " << std::endl;
 	file << "------------------" << std::endl;
 	file.close();
+	std::cout << "'" + target + "_shrubbery" + "'" << " file created." << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

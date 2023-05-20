@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:00:34 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 19:07:12 by aechafii         ###   ########.fr       */
+/*   Created: 2023/05/20 20:58:15 by aechafii          #+#    #+#             */
+/*   Updated: 2023/05/20 21:08:34 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #define INTERN_HPP
 
 #include <iostream>
-#include "AForm.hpp"
-
-class Intern: public AForm{
+#include "Form.hpp"
+class Intern{
 	public:
 		Intern();
-		Intern(Intern &obj);
+		Intern(const Intern &obj);
 		Intern	&operator=(const Intern &obj);
-		AForm	*makeForm(std::string formName, std::string formTarget);	
-		~Intern();
+		Form	makeForm(std::string formName, std::string formTarget);
+		~Intern();	
 };
 
-#endif 
+#endif

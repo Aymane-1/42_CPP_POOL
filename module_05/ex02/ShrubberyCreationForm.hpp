@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:32:17 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 15:59:48 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:42:09 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ class ShrubberyCreationForm: public AForm
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string name);
+		ShrubberyCreationForm(std::string namee, std::string targett, int toSign, int toExec);
 		ShrubberyCreationForm(ShrubberyCreationForm &obj);
 		ShrubberyCreationForm	&operator=(ShrubberyCreationForm const &obj);
-		virtual void	execute(Bureaucrat const &executor) const;
+		void					execute(Bureaucrat const &executor) const;
 		~ShrubberyCreationForm();
 };
 

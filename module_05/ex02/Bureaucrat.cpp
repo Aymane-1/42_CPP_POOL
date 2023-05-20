@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:05 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 18:56:27 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:54:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ std::string	Bureaucrat::getName()
 	return (this->name);
 }
 
-int	Bureaucrat::getGrade()
+int	Bureaucrat::getGrade() const
 {
 	return (grade);
 }
@@ -81,11 +81,19 @@ void	Bureaucrat::signForm(AForm &obj)
 	}
 }
 
-// void	Bureaucrat::executeForm(AForm  &form)
-// {
+void	Bureaucrat::executeForm(AForm const &form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->getName() << " could not execute " << form.getName() << std::endl;
+	}
 	
-// 	std::cout << this->getName() << " executed " << this->name << form.getName() << std::endl;
-// }
+}
 
 std::ostream	&operator<<(std::ostream &out, Bureaucrat &obj)
 {

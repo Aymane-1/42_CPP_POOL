@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 13:44:11 by aechafii          #+#    #+#              #
-#    Updated: 2023/05/19 19:00:19 by aechafii         ###   ########.fr        #
+#    Updated: 2023/05/20 20:57:57 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRC =   main.cpp \
 		RobotomyRequestForm.cpp \
 		PresidentialPardonForm.cpp \
 		Intern.cpp
-		
 		
 HEADER = Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp Intern.hpp
 		

@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:45:35 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/19 18:56:21 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:52:34 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ class Bureaucrat{
 		Bureaucrat(const Bureaucrat &obj);
 		Bureaucrat &operator=(const Bureaucrat &obj);
 		std::string	getName();
-		int			getGrade();
+		int			getGrade() const;
 		void		IncrementGrade();
 		void		DecrementGrade();
 		void		signForm(AForm &obj);
-		// void		executeForm(AForm  &form);
+		void		executeForm(AForm const &form); 
 		~Bureaucrat();
 };
 
