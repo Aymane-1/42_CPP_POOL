@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 13:44:11 by aechafii          #+#    #+#              #
-#    Updated: 2023/05/20 20:57:57 by aechafii         ###   ########.fr        #
+#    Updated: 2023/05/21 18:59:05 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,13 @@ NAME = App
 SRC =   main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
+		Form.cpp \
 		ShrubberyCreationForm.cpp \
 		RobotomyRequestForm.cpp \
 		PresidentialPardonForm.cpp \
 		Intern.cpp
 		
-HEADER = Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp Intern.hpp
+HEADER = Bureaucrat.hpp AForm.hpp Form.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp Intern.hpp
 		
 OBJ = $(SRC:.cpp=.o)
 

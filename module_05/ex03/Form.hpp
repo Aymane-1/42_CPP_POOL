@@ -1,53 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Intern.hpp                                         :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/20 20:58:15 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/21 21:35:34 by aechafii         ###   ########.fr       */
+/*   Created: 2023/05/21 18:59:20 by aechafii          #+#    #+#             */
+/*   Updated: 2023/05/21 19:36:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERN_HPP
-#define INTERN_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <iostream>
-#include "AForm.hpp"
-class Intern{
+#include <exception>
+#include "Bureaucrat.hpp"
+
+class Form{
+	private:
+		const std::string	name;
+		bool				Signed;
+		const int			gradeToSign;
+		const int			gradeToExec;
 	public:
 		class GradeTooHighException: public std::exception{
 			public:
-				const char *what() const throw (){
-					return ("GradeTooHigh!");
+				const char *what() const throw(){
+					return ("GradeTooHigh!");	
 				}
 		};
 		class GradeTooLowException: public std::exception{
 			public:
-				const char *what() const throw (){
+				const char *what() const throw(){
 					return ("GradeTooLow!");
 				}
 		};
 		class FormUnsignedException: public std::exception{
 			public:
-				const char *what() const throw (){
+				const char *what() const throw(){
 					return ("The form is unsigned!");
-				}	
-		};
-		class FormUnexistantException: public std::exception{
-			public:
-				const char *what() const throw (){
-					return ("The form does not exist!");
 				}
 		};
-		Intern();
-		Intern(const Intern &obj);
-		Intern	&operator=(const Intern &obj);
-		AForm	*makeForm(const std::string formName, const std::string formTarget);
-		~Intern();
+		Form();
+		Form(const std::string &namee, const int GradeToSign, const int GradeToExec);
+		Form(Form &obj);
+		Form		&operator=(const Form &obj);
+		std::string		getName() const;
+		bool			getSignedState() const;
+		int				getGradeToSign() const;
+		int				getGradeToExec() const;
+		void			beSigned(Bureaucrat &obj);
+		// virtual void	execute(Bureaucrat const &executor);
+		~Form();	
 };
-
-typedef	void(*funcPtr)(void);
 
 #endif

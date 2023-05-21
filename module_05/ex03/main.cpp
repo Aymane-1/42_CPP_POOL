@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:50:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:37:41 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
@@ -31,6 +32,8 @@ int main()
 		RobotomyRequestForm	lb("robotomyRequest");
 		ShrubberyCreationForm jb("asciiTree");
 
+		std::cout << "-----------------------" << std::endl;
+		
 		rb.beSigned(Counselor);
 		rb.execute(Counselor);
 		lb.beSigned(Counselor);
@@ -50,6 +53,12 @@ int main()
 		AForm *form;
 		form = &Document;
 		Counselor.executeForm(*form);
+		
+		std::cout << "-----------------------" << std::endl;
+		
+		Intern intrn;
+		
+		intrn.makeForm("RobotomyRequestForm", "OwnerShip");
 		
 		std::cout << "-----------------------" << std::endl;
 	}
