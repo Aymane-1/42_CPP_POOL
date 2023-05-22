@@ -6,12 +6,14 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:43:06 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:34:02 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:08:18 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
+
+//---------------------------*** constructors ***---------------------------
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest", 72, 45)
 {
@@ -25,17 +27,21 @@ RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm("RobotomyRequ
 	target = name;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string namee, std::string targett, int toSign, int toExec) \
-: AForm(namee, toSign, toExec)
+RobotomyRequestForm::RobotomyRequestForm(std::string name, std::string type) \
+: AForm(name, 72, 45)
 {
+	this->target = type;
 	std::cout << "RobotomyRequestForm parametrized constructor called." << std::endl;
-	target = targett;
 }
+
+//---------------------------*** copy constructor ***---------------------------
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &obj)
 {
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &obj)
 {
@@ -46,13 +52,15 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &o
 	return (*this);
 }
 
+//---------------------------*** member functions ***---------------------------
+
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (!this->getSignedState())
 		throw FormUnsignedException();
 	else if (executor.getGrade() > this->getGradeToExec())
 		throw GradeTooLowException();
-	srand(time(0));
+	srand(time(NULL));
 	int RandomNumber = rand();
 	bool probability = RandomNumber % 2;
 	std::cout << "Some drilling noises..." << std::endl;
@@ -61,6 +69,8 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	else
 		std::cout << target << " has failed to be robotomized." << std::endl;
 }
+
+//---------------------------*** destructor ***---------------------------
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {

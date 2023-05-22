@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/21 21:37:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:14:45 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,36 @@ int main()
 	try
 	{
 		Bureaucrat Counselor("Counselor", 1);
-		ShrubberyCreationForm ChristmasTree("binaryTree", "home", 145, 137);
-		RobotomyRequestForm machine("someGuy", "birthCertificate", 70, 40);
-		PresidentialPardonForm Document("Contract", "Prisoner", 20, 2);
 		
-		// Instantiation of objects with different constructors between above and below. 
-		
-		PresidentialPardonForm rb("PresidentialPardon");
-		RobotomyRequestForm	lb("robotomyRequest");
-		ShrubberyCreationForm jb("asciiTree");
+		PresidentialPardonForm ppf("Bandit");
+		RobotomyRequestForm	rrf("drivingLicence");
+		ShrubberyCreationForm scf("home");
+		Intern Intrn;
 
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "\n--------------*** FORMS DEMONSTRATION ***---------------\n" << std::endl;
 		
-		rb.beSigned(Counselor);
-		rb.execute(Counselor);
-		lb.beSigned(Counselor);
-		lb.execute(Counselor);
-		jb.beSigned(Counselor);
-		jb.execute(Counselor);
+		ppf.beSigned(Counselor);
+		ppf.execute(Counselor);
+		rrf.beSigned(Counselor);
+		rrf.execute(Counselor);
+		scf.beSigned(Counselor);
+		scf.execute(Counselor);
 		
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "\n-----------*** BUREAUCRAT FORMS EXECUTION ***-----------\n" << std::endl;
 		
-		ChristmasTree.beSigned(Counselor);
-		machine.beSigned(Counselor);
-		Document.beSigned(Counselor);
-		
-		ChristmasTree.execute(Counselor);
-		machine.execute(Counselor);
-		// Document.execute(Counselor);
 		AForm *form;
-		form = &Document;
+		
+		form = Intrn.makeRobotomyRequestForm("RobotomyRequestForm", "birthCertificate");
+		form->beSigned(Counselor);
 		Counselor.executeForm(*form);
 		
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "\n------------------*** INTERN PART ***-------------------\n" << std::endl;
 		
-		Intern intrn;
+		AForm *ptr = Intrn.makeForm("ShrubberyCreationForm", "file");
+		ptr->beSigned(Counselor);
+		ptr->execute(Counselor);
 		
-		intrn.makeForm("RobotomyRequestForm", "OwnerShip");
-		
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "\n---------------------*** DESTRUCTORS ***----------------\n" << std::endl;
 	}
 	catch(const std::exception& e)
 	{

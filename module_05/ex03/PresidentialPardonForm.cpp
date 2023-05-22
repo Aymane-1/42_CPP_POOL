@@ -6,11 +6,13 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:58:17 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:30:04 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:08:07 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+
+//---------------------------*** constructors ***---------------------------
 
 PresidentialPardonForm::PresidentialPardonForm(): AForm("SomeType", 25, 5)
 {
@@ -22,19 +24,24 @@ PresidentialPardonForm::PresidentialPardonForm(std::string name) \
  : AForm(name, 25, 5)
 {
 	target = name;
-}
-
-PresidentialPardonForm::PresidentialPardonForm(std::string namee, std::string targett, int toSign, int toExec) \
-: AForm(namee, toSign, toExec)
-{
-	target = targett;
 	std::cout << "PresidentialPardonForm parametrized constructor called." << std::endl;
 }
+
+PresidentialPardonForm::PresidentialPardonForm(std::string name, std::string target)\
+: AForm(name, 25, 5)
+{
+	this->target = target;
+	std::cout << "PresidentialPardonForm parametrized constructor called." << std::endl;
+}
+
+//---------------------------*** copy constructor ***---------------------------
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &obj)
 {
 	*this= obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm const &obj)
 {
@@ -45,6 +52,8 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
 	return (*this);
 }
 
+//---------------------------*** member functions ***---------------------------
+
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	if (!this->getSignedState())
@@ -53,6 +62,8 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 		throw GradeTooLowException();	
 	std::cout << target << " has been pardoned by Zaphod Beeblerox." << std::endl;	
 }
+
+//---------------------------*** destructor ***---------------------------
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {

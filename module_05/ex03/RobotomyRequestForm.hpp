@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:33:23 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:31:59 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:07:19 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class RobotomyRequestForm: public AForm
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(std::string name);
-		RobotomyRequestForm(std::string namee, std::string targett, int toSign, int toExec);
+		RobotomyRequestForm(std::string name, std::string target);
 		RobotomyRequestForm(RobotomyRequestForm &obj);
 		RobotomyRequestForm	&operator=(RobotomyRequestForm const &obj);
-		virtual	void	execute(Bureaucrat const &executor) const;
+		virtual	void		execute(Bureaucrat const &executor) const;
 		~RobotomyRequestForm();	
 };
 

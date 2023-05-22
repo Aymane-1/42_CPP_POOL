@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:50:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:45:56 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:16:15 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,36 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+//---------------------------*** constructors ***---------------------------
+
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyForm", 145, 137)
 {
 	std::cout << "ShruberryCreationForm default constructor called." << std::endl;
 	target = "file";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name) \
+: AForm(name, 145, 137)
 {
 	target = name;
 	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string namee, std::string targett, int toSign, int toExec) \
-: AForm(namee, toSign, toExec)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) \
+: AForm(name, 145, 137)
 {
-	target = targett;
-	std::cout << "Shrubbery parametrized constructor called." << std::endl;
+	this->target = target;
+	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;	
 }
+
+//---------------------------*** copy constructor ***---------------------------
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj):AForm(obj.getName(), 145, 137)
 {
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &obj)
 {
@@ -46,6 +53,8 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	}
 	return (*this);
 }
+
+//---------------------------*** member functions ***---------------------------
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
@@ -75,8 +84,10 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file << "        --        " << std::endl;
 	file << "------------------" << std::endl;
 	file.close();
-	std::cout << "'" + target + "_shrubbery" + "'" << " file created." << std::endl;
+	std::cout << "'" + target + "_shrubbery'" << " file created succefully." << std::endl;
 }
+
+//------------------------------*** destructor ***-------------------------------
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {

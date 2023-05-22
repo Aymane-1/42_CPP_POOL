@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:58:15 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/21 21:35:34 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:33:51 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,25 @@ class Intern{
 		class FormUnsignedException: public std::exception{
 			public:
 				const char *what() const throw (){
-					return ("The form is unsigned!");
+					return ("the form is unsigned!");
 				}	
 		};
 		class FormUnexistantException: public std::exception{
 			public:
 				const char *what() const throw (){
-					return ("The form does not exist!");
+					return ("Error: Seems that the form passed on as a parameter does not exist!");
 				}
 		};
 		Intern();
 		Intern(const Intern &obj);
 		Intern	&operator=(const Intern &obj);
 		AForm	*makeForm(const std::string formName, const std::string formTarget);
+		AForm	*makeShrubberyCreationForm(std::string name, std::string target);
+		AForm	*makePresidentialPardonForm(std::string name, std::string target);
+		AForm	*makeRobotomyRequestForm(std::string name, std::string target);
 		~Intern();
 };
 
-typedef	void(*funcPtr)(void);
+typedef	AForm *(Intern::*funcPtr)(std::string formName, std::string formTarget);
 
 #endif

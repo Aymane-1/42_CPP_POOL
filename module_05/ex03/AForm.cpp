@@ -6,11 +6,13 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 16:47:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 13:43:48 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:31:36 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
+
+//---------------------------*** constructors ***---------------------------
 
 AForm::AForm(): name("SomeRandomDocument"), gradeToSign(150),gradeToExec(150)
 {
@@ -26,6 +28,8 @@ AForm::AForm(const std::string &namee, const int GradeToSign, const int GradeToE
 		throw GradeTooHighException();
 }
 
+//---------------------------*** copy constructor ***---------------------------
+
 AForm::AForm(const AForm &obj): name(obj.name), gradeToSign(obj.gradeToSign) ,gradeToExec(obj.gradeToExec)
 {
 	if (gradeToSign > 150 || gradeToExec > 150)
@@ -34,6 +38,8 @@ AForm::AForm(const AForm &obj): name(obj.name), gradeToSign(obj.gradeToSign) ,gr
 		throw GradeTooHighException();
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 AForm	&AForm::operator=(const AForm &obj)
 {
@@ -44,6 +50,8 @@ AForm	&AForm::operator=(const AForm &obj)
 	return *this;
 }
 
+//---------------------------*** operator overload ***---------------------------
+
 std::ostream	&operator<<(std::ostream &output, AForm &obj)
 {
 	if (obj.getSignedState())
@@ -52,6 +60,8 @@ std::ostream	&operator<<(std::ostream &output, AForm &obj)
 		std::cout << "Name: " << obj.getName() << " GradeSignedRequired "<< obj.getGradeToSign() << " GradeExecRequired " << obj.getGradeToExec() << " State: false" << std::endl;
 	return (output);
 }
+
+//---------------------------*** accessors ***---------------------------
 
 std::string	AForm::getName() const
 {
@@ -73,6 +83,8 @@ int	AForm::getGradeToExec(void) const
 	return (gradeToExec);
 }
 
+//---------------------------*** member functions ***---------------------------
+
 void	AForm::beSigned(Bureaucrat &obj)
 {
 	if (obj.getGrade() > this->gradeToSign)
@@ -80,6 +92,8 @@ void	AForm::beSigned(Bureaucrat &obj)
 	else
 		Signed = true;
 }
+
+//---------------------------*** destructor ***---------------------------
 
 AForm::~AForm()
 {
