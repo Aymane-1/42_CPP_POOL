@@ -6,12 +6,14 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:05 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 13:54:38 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:51:13 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+
+//---------------------------*** constructors ***---------------------------
 
 Bureaucrat::Bureaucrat() : name("SomeCorruptOfficial"), grade(150)
 {
@@ -27,11 +29,15 @@ Bureaucrat::Bureaucrat(const std::string &namee, int gradee) : name(namee) , gra
 		throw GradeTooLowException();
 }
 
+//---------------------------*** copy constructor ***---------------------------
+
 Bureaucrat::Bureaucrat(const Bureaucrat &obj)
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
 {
@@ -44,6 +50,8 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
 	return (*this);
 }
 
+//---------------------------*** accessors ***---------------------------
+
 std::string	Bureaucrat::getName()
 {
 	return (this->name);
@@ -53,6 +61,8 @@ int	Bureaucrat::getGrade() const
 {
 	return (grade);
 }
+
+//---------------------------*** member functions ***---------------------------
 
 void	Bureaucrat::IncrementGrade()
 {
@@ -95,11 +105,15 @@ void	Bureaucrat::executeForm(AForm const &form)
 	
 }
 
+//---------------------------*** operator overload ***---------------------------
+
 std::ostream	&operator<<(std::ostream &out, Bureaucrat &obj)
 {
 	std::cout << obj.getName() << ", bureaucrat grade is " << obj.getGrade() << std::endl;
 	return out;
 }
+
+//---------------------------*** destructor ***---------------------------
 
 Bureaucrat::~Bureaucrat()
 {

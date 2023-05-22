@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:33:23 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:31:59 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:51:44 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "AForm.hpp"
 #include <iostream>
+#include <cstdlib>
 class RobotomyRequestForm: public AForm
 {
 	private:

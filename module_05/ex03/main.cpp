@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 20:14:45 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:47:42 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main()
 {
 	try
 	{
+		std::cout << "\n---------------------*** CONSTRUCTORS ***----------------\n" << std::endl;
+		
 		Bureaucrat Counselor("Counselor", 1);
 		
 		PresidentialPardonForm ppf("Bandit");

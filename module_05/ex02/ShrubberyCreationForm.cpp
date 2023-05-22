@@ -6,13 +6,15 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:50:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:45:56 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:50:29 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+
+//---------------------------*** constructors ***---------------------------
 
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyForm", 145, 137)
 {
@@ -33,10 +35,14 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string namee, std::string targ
 	std::cout << "Shrubbery parametrized constructor called." << std::endl;
 }
 
+//---------------------------*** copy constructor ***---------------------------
+
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj):AForm(obj.getName(), 145, 137)
 {
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &obj)
 {
@@ -46,6 +52,8 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	}
 	return (*this);
 }
+
+//---------------------------*** member functions ***---------------------------
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
@@ -75,8 +83,10 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file << "        --        " << std::endl;
 	file << "------------------" << std::endl;
 	file.close();
-	std::cout << "'" + target + "_shrubbery" + "'" << " file created." << std::endl;
+	std::cout << "'" + target + "_shrubbery'" << " file created succefully." << std::endl;
 }
+
+//---------------------------*** destructor ***---------------------------
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {

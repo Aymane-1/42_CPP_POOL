@@ -6,12 +6,13 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:43:06 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:34:02 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:51:48 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include <cstdlib>
+
+//---------------------------*** constructors ***---------------------------
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest", 72, 45)
 {
@@ -32,10 +33,14 @@ RobotomyRequestForm::RobotomyRequestForm(std::string namee, std::string targett,
 	target = targett;
 }
 
+//---------------------------*** copy constructor ***---------------------------
+
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &obj)
 {
 	*this = obj;
 }
+
+//---------------------------*** copy assignment ***---------------------------
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &obj)
 {
@@ -45,6 +50,8 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &o
 	}
 	return (*this);
 }
+
+//---------------------------*** member functions ***---------------------------
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
@@ -61,6 +68,8 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	else
 		std::cout << target << " has failed to be robotomized." << std::endl;
 }
+
+//---------------------------*** destructor ***---------------------------
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {

@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 20:50:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:47:26 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,32 @@ int main()
 {
 	try
 	{
+		std::cout << "\n------------------*** CONSTRUCTORS ***-------------------\n" << std::endl;
+		
 		Bureaucrat Counselor("Counselor", 1);
-		ShrubberyCreationForm ChristmasTree("binaryTree", "home", 145, 137);
-		RobotomyRequestForm machine("someGuy", "birthCertificate", 70, 40);
-		PresidentialPardonForm Document("Contract", "Prisoner", 20, 2);
 		
-		// Instantiation of objects with different constructors between above and below. 
-		
-		PresidentialPardonForm rb("PresidentialPardon");
-		RobotomyRequestForm	lb("robotomyRequest");
-		ShrubberyCreationForm jb("asciiTree");
+		PresidentialPardonForm ppf("Bandit");
+		RobotomyRequestForm	rrf("drivingLicence");
+		ShrubberyCreationForm scf("home");
 
-		rb.beSigned(Counselor);
-		rb.execute(Counselor);
-		lb.beSigned(Counselor);
-		lb.execute(Counselor);
-		jb.beSigned(Counselor);
-		jb.execute(Counselor);
+		std::cout << "\n--------------*** FORMS DEMONSTRATION ***---------------\n" << std::endl;
 		
-		std::cout << "-----------------------" << std::endl;
+		ppf.beSigned(Counselor);
+		ppf.execute(Counselor);
+		rrf.beSigned(Counselor);
+		rrf.execute(Counselor);
+		scf.beSigned(Counselor);
+		scf.execute(Counselor);
 		
-		ChristmasTree.beSigned(Counselor);
-		machine.beSigned(Counselor);
-		Document.beSigned(Counselor);
+		std::cout << "\n-----------*** BUREAUCRAT FORMS EXECUTION ***-----------\n" << std::endl;
 		
-		ChristmasTree.execute(Counselor);
-		machine.execute(Counselor);
-		// Document.execute(Counselor);
 		AForm *form;
-		form = &Document;
+		
+		form = &rrf;
+		form->beSigned(Counselor);
 		Counselor.executeForm(*form);
 		
-		std::cout << "-----------------------" << std::endl;
+		std::cout << "\n------------------*** DESTRUCTORS ***-------------------\n" << std::endl;
 	}
 	catch(const std::exception& e)
 	{
