@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 17:31:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:37:26 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main()
         Form form("Judge", 1, 50);
         form.beSigned(obj);
         obj.signForm(form);
-        std::cout << obj;
+        std::cout << form;
     }
     catch(std::exception &e)
     {

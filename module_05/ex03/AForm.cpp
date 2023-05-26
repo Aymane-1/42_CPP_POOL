@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 16:47:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 19:31:36 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:50:23 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ AForm	&AForm::operator=(const AForm &obj)
 
 std::ostream	&operator<<(std::ostream &output, AForm &obj)
 {
+	std::cout << "Name: " << obj.getName() << "\nGradeSignedRequired: "<< obj.getGradeToSign() << "\nGradeExecRequired: " << obj.getGradeToExec();
 	if (obj.getSignedState())
-		std::cout << "Name: " << obj.getName() << " GradeSignedRequired "<< obj.getGradeToSign() << " GradeExecRequired " << obj.getGradeToExec() << " State: true" << std::endl;
+		std::cout << "\nSigned state: true." << std::endl;
 	else
-		std::cout << "Name: " << obj.getName() << " GradeSignedRequired "<< obj.getGradeToSign() << " GradeExecRequired " << obj.getGradeToExec() << " State: false" << std::endl;
+		std::cout << "\nSigned state: false." << std::endl;
 	return (output);
 }
 

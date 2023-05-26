@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 16:47:33 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/18 19:25:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:39:01 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ Form	&Form::operator=(const Form &obj)
 std::ostream	&operator<<(std::ostream &output, Form &obj)
 {
 	if (obj.getSignedState())
-		std::cout << "Name: " << obj.getName() << " GradeSignedRequired "<< obj.getGradeToSign() << " GradeExecRequired " << obj.getGradeToExec() << " State: true" << std::endl;
+		std::cout << "Name: " << obj.getName() << "\nGradeSignedRequired: "<< obj.getGradeToSign() << "\nGradeExecRequired: " << obj.getGradeToExec() << "\nState: true" << std::endl;
 	else
-		std::cout << "Name: " << obj.getName() << " GradeSignedRequired "<< obj.getGradeToSign() << " GradeExecRequired " << obj.getGradeToExec() << " State: false" << std::endl;
+		std::cout << "Name: " << obj.getName() << "\nGradeSignedRequired: "<< obj.getGradeToSign() << "\nGradeExecRequired: " << obj.getGradeToExec() << "\nState: false" << std::endl;
 	return (output);
 }
 

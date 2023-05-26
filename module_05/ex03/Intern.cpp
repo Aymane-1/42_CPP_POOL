@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 21:01:48 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 21:46:32 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:47:25 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Intern::Intern(const Intern &obj)
 Intern	&Intern::operator=(const Intern &obj)
 {
 	std::cout << "Intern copy assignment called." << std::endl;
-	(void)obj;
+	(void)obj; // No attributes to copy.
 	return (*this);
 }
 
@@ -45,28 +45,29 @@ Intern	&Intern::operator=(const Intern &obj)
 
 AForm	*Intern::makeShrubberyCreationForm(std::string name, std::string target)
 {
-	AForm	*form = new ShrubberyCreationForm(name, target);
-	std::cout << "Intern created " << target << " form succesfully." << std::endl;
+	AForm	*form = new ShrubberyCreationForm(target);
+	std::cout << "Intern created " << name << " form succesfully." << std::endl;
 	return (form);
 }
 
 AForm	*Intern::makeRobotomyRequestForm(std::string name, std::string target)
 {
-	AForm *form = new RobotomyRequestForm(name, target);
-	std::cout << "Intern created " << target << " form succesfully." << std::endl;
+	AForm *form = new RobotomyRequestForm(target);
+	std::cout << "Intern created " << name << " form succesfully." << std::endl;
 	return (form);
 }
 
 AForm	*Intern::makePresidentialPardonForm(std::string name, std::string target)
 {
-	AForm *form = new PresidentialPardonForm(name, target);
-	std::cout << "Intern created " << target << " form succesfully." << std::endl;
+	AForm *form = new PresidentialPardonForm(target);
+	std::cout << "Intern created " << name << " form succesfully." << std::endl;
 	return (form);
 }
 
-AForm	*Intern::makeForm(const std::string formName, const std::string formTarget)
+AForm	*Intern::makeForm(std::string formName, std::string formTarget)
 {
 	std::string ptr[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+	funcPtr forms[3] = {&Intern::makeShrubberyCreationForm, &Intern::makeRobotomyRequestForm, &Intern::makePresidentialPardonForm};
 	int i = 0;
 	while (i < 3)
 	{
@@ -79,13 +80,13 @@ AForm	*Intern::makeForm(const std::string formName, const std::string formTarget
 	AForm *a = NULL;
 	switch (i){
 		case 0:
-			a = Intern::makeShrubberyCreationForm(formName, formTarget);
+			a = (this->*forms[0])(formName, formTarget);
 			break;
 		case 1:
-			a = Intern::makeRobotomyRequestForm(formName, formTarget);
+			a = (this->*forms[1])(formName, formTarget);
 			break;
 		case 2:
-			a = Intern::makePresidentialPardonForm(formName, formTarget);
+			a = (this->*forms[2])(formName, formTarget);
 			break;
 	}
 	return (a);

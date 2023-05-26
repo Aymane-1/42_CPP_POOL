@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:58:17 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 20:08:07 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:28:59 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,10 @@ PresidentialPardonForm::PresidentialPardonForm(): AForm("SomeType", 25, 5)
 	target = "someTarget";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string name) \
- : AForm(name, 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string targett) \
+ : AForm(targett, 25, 5)
 {
-	target = name;
-	std::cout << "PresidentialPardonForm parametrized constructor called." << std::endl;
-}
-
-PresidentialPardonForm::PresidentialPardonForm(std::string name, std::string target)\
-: AForm(name, 25, 5)
-{
-	this->target = target;
+	target = targett;
 	std::cout << "PresidentialPardonForm parametrized constructor called." << std::endl;
 }
 

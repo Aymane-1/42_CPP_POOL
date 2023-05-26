@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:00:57 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/20 19:56:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:41:01 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ class AForm{
 			public:
 				const char * what() const throw()
 				{
-					return ("The Form is unsigned!");
+					return ("the Form is unsigned!");
 				}
 		};
 		AForm();

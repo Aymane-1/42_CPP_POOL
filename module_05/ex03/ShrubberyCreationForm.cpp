@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:50:19 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 20:16:15 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:19:20 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 //---------------------------*** constructors ***---------------------------
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyForm", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 145, 137)
 {
 	std::cout << "ShruberryCreationForm default constructor called." << std::endl;
 	target = "file";
@@ -27,13 +27,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string name) \
 {
 	target = name;
 	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) \
-: AForm(name, 145, 137)
-{
-	this->target = target;
-	std::cout << "ShrubberyCreationForm parametrized constructor called." << std::endl;	
 }
 
 //---------------------------*** copy constructor ***---------------------------

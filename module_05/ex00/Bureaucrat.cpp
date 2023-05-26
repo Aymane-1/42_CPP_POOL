@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:05 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/14 18:51:41 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:39:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Bureaucrat::Bureaucrat(const std::string &namee, int gradee) : name(namee) , gra
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj)
 {
-	std::cout << "Bureaucrat copy constructor called" << std::endl;
+	std::cout << "Bureaucrat copy constructor called." << std::endl;
 	*this = obj;
 }
 
@@ -67,10 +67,10 @@ void	Bureaucrat::DecrementGrade()
 		throw GradeTooLowException();
 }
 
-std::ostream	&operator<<(std::ostream &out, Bureaucrat &obj)
+std::ostream	&operator<<(std::ostream &output, Bureaucrat &obj)
 {
 	std::cout << obj.getName() << ", bureaucrat grade is " << obj.getGrade() << std::endl;
-	return out;
+	return (output);
 }
 
 Bureaucrat::~Bureaucrat()

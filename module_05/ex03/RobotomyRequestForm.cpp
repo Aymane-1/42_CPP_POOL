@@ -6,32 +6,24 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:43:06 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 20:08:18 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:36:00 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include <cstdlib>
 
 //---------------------------*** constructors ***---------------------------
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45)
 {
 	std::cout << "RobotomyRequestForm default constructor called." << std::endl;
 	target = "someTarget";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm("RobotomyRequest", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(std::string targett) : AForm("RobotomyRequestForm", 72, 45)
 {
 	std::cout << "RobotomyRequestForm parametrized constructor" << std::endl;
-	target = name;
-}
-
-RobotomyRequestForm::RobotomyRequestForm(std::string name, std::string type) \
-: AForm(name, 72, 45)
-{
-	this->target = type;
-	std::cout << "RobotomyRequestForm parametrized constructor called." << std::endl;
+	target = targett;
 }
 
 //---------------------------*** copy constructor ***---------------------------

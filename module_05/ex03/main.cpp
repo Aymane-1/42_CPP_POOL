@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:11 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/22 20:47:42 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:17:57 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ int main()
 		form = Intrn.makeRobotomyRequestForm("RobotomyRequestForm", "birthCertificate");
 		form->beSigned(Counselor);
 		Counselor.executeForm(*form);
+		std::cout << *form << std::endl; // Operator oveload demonstration.
 		
 		std::cout << "\n------------------*** INTERN PART ***-------------------\n" << std::endl;
 		
-		AForm *ptr = Intrn.makeForm("ShrubberyCreationForm", "file");
+		AForm *ptr = Intrn.makeForm("PresidentialPardonForm", "Gangster");
 		ptr->beSigned(Counselor);
 		ptr->execute(Counselor);
 		
@@ -59,4 +60,5 @@ int main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	
 }
