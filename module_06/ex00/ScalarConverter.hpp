@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:22:25 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/28 21:12:51 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:24:39 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 #include <cstdlib>
 
 class ScalarConverter{
+	private:
+		// char	c;
+		// int		iNumber;
+		// float	fNumber;
+		// double	dNumber;
 	public:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter &obj);

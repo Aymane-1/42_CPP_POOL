@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:21:34 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/29 20:26:27 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:42:30 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,120 +29,141 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &obj)
 	return (*this);
 }
 
+int	isWhiteSpaces(char c)
+{
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
+}
+
+int	isNumeric(char c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
+int	isPrintable(char c)
+{
+	if (c >= 32 && c <= 127)
+		return (1);
+	return (0);
+}
+
+int	isNonPrintable(char c)
+{
+	if (c >= 0 && c <= 31)
+		return (1);
+	return (0);
+}
+
 int	checkCharacter(std::string input)
 {
-	int i = 0;
-	while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-		i++;
-	if (input[i] && input[i] >= 32 && input[i] <= 127)
+	int index = 0;
+	while (input[index] && isWhiteSpaces(input[index]))
+		index++;
+	if (index == 1)
+		return (1);
+	if (input[index] && !isNumeric(input[index]) && isPrintable(input[index]))
 	{
-		i++;
-		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-			i++;
-		if (i == (int)input.length())
+		index++;
+		while (input[index] && isWhiteSpaces(input[index]))
+			index++;
+		if (index == (int)input.length())
 			return (1);
 	}
-	if (input[i] && input[i] >= 0 && input[i] <= 31)
-	{
-		i++;
-		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-			i++;
-		if (i == (int)input.length())
-			return (0);
-	}
-	return (-1);
+	// else if (input[index] && isNonPrintable(input[index]))
+	// {
+	// 	index++;
+	// 	while (input[index] && isWhiteSpaces(input[index]))
+	// 		index++;
+	// 	if (index == (int)input.length())
+	// 		return (-1);
+	// }
+	return (0);
 }
 
-bool	checkInteger(std::string input)
+int	checkInteger(std::string input, int index)
 {
-	int i = 0;
-	while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-		i++;
-	while (((input[i]) && ((input[i] == '-' && \
-			input[i + 1] >= 48 && input[i + 1] <= 57))) || \
-				(((input[i]) && (input[i] == '+') && \
-					input[i + 1] >= 48 && input[i + 1] <= 57)))
-		i++;
-	while (input[i] && input[i] >= 48 && input[i] <= 57)
-		i++;
-	while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-		i++;
-	if (i == (int)input.length())
-		return (true);
-	return (false);
+	if (!isNumeric(input[index - 1]))
+		return (0);
+	while (input[index] && isWhiteSpaces(input[index]))
+		index++;
+	if (index == (int)input.length())
+		return (1);
+	return (0);
 }
 
-bool	checkFloat(std::string input)
+int	checkFloat(std::string input, int index)
 {
-	int i = 0;
-	while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-		i++;
-	while (((input[i]) && ((input[i] == '-' && \
-			input[i + 1] >= 48 && input[i + 1] <= 57))) || \
-				(((input[i]) && (input[i] == '+') && \
-					input[i + 1] >= 48 && input[i + 1] <= 57)))
-		i++;
-	while (input[i] && (input[i] >= 48 && input[i] <= 57))
-		i++;
-	if (input[i] == '.')
+	if (input[index] == '.')
 	{
-		i++;
-		while (input[i] && (input[i] >= 48 && input[i] <= 57))
-			i++;
-		if (input[i] == 'f')
+		index++;
+		while (input[index] && isNumeric(input[index]))
+			index++;
+		if (input[index] == 'f')
 		{
-			i++;
-			while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-				i++;
+			index++;
+			while (input[index] && isWhiteSpaces(input[index]))
+				index++;
+		if (index == (int)input.length())
+			return (1);
 		}
-		if (i == (int)input.length())
-			return (true);
 	}
-	return (false);
+	return (0);
 }
 
-bool	checkDouble(std::string input)
+int	checkDouble(std::string input, int index)
 {
-	int i = 0;
-	while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-		i++;
-	while (((input[i]) && ((input[i] == '-' && \
-			input[i + 1] >= 48 && input[i + 1] <= 57))) || \
-				(((input[i]) && (input[i] == '+') && \
-					input[i + 1] >= 48 && input[i + 1] <= 57)))
-		i++;
-	while (input[i] && (input[i] >= 48 && input[i] <= 57))
-		i++;
-	if (input[i] == '.')
+	if (input[index] == '.')
 	{
-		i++;
-		while (input[i] && (input[i] >= 48 && input[i] <= 57))
-			i++;
-		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
-			i++;
-		if (i == (int)input.length())
-			return (true);
+		index++;
+		while (input[index] && isNumeric(input[index]))
+			index++;
+		while (input[index] && isWhiteSpaces(input[index]))
+			index++;
+		if (index == (int)input.length())
+			return (1);
 	}
-	return (false);
+	return (0);
 }
 
-void	checkNumericality(std::string input)
+int	checkNumericality(std::string input)
+{
+	int index = 0;
+	while (input[index] && isWhiteSpaces(input[index]))
+		index++;
+	while (((input[index]) && (input[index] == '-' && isNumeric(input[index + 1]))) \
+		|| ((input[index]) && (input[index] == '+' && isNumeric(input[index + 1]))))
+		index++;
+	while (input[index] && isNumeric(input[index]))
+		index++;
+	if (checkInteger(input, index))
+		return (2);
+	else if (checkFloat(input, index))
+		return (3);
+	else if (checkDouble(input, index))
+		return (4);
+	return (0);
+}
+
+int	checkInput(std::string input)
 {
 	if (input.empty())
 	{
 		std::cout << "INVALID ARGUMENTS!" << std::endl;
-		return ;
+		exit(1);
 	}
-	std::cout << "char check: " << checkCharacter(input) << std::endl;
-	std::cout << "integer check: " << checkInteger(input) << std::endl;
-	std::cout << "float check: " << checkFloat(input) << std::endl;
-	std::cout << "double check: " << checkDouble(input) << std::endl;
+	if (checkCharacter(input))
+		return (checkCharacter(input));
+	else if (checkNumericality(input))
+		return (checkNumericality(input));
+	return (0);
 }
 
 void	ScalarConverter::convert(std::string literalForm)
 {
-	
-	checkNumericality(literalForm);
+	std::cout << checkInput(literalForm) << std::endl;
 }
 
 ScalarConverter::~ScalarConverter()
