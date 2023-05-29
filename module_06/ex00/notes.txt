@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    notes.txt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/27 18:28:18 by aechafii          #+#    #+#              #
+#    Updated: 2023/05/28 21:10:18 by aechafii         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+---------------••• TYPES OF CASTING IN C++ •••---------------------
+
+- const_cast : Basically changes a data type to const or quite the opposite.
+
+- static_cast : This is the simplest type of cast which can be used. 
+	It is a compile time cast.It does things like implicit conversions
+    between types (such as int to float, or pointer to void*), and it 
+	can also call explicit conversion functions (or implicit ones).
+
+- dynamic_cast :
+
+- reinterpret_cast : Can convert any data type to another.
+
+----------------------------------------------------------------------
+
+- Parsing: check if value is numeric, then check if it's printable
+- Exceptions: Non-displayable characters / 

@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:22:25 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/26 20:24:15 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:12:51 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class ScalarConverter{
-	private:
-		
 	public:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter &obj);
 		ScalarConverter	&operator=(const ScalarConverter &obj);
-		void	convert(std::string	literalForm);
+		static void	convert(std::string	literalForm);
 		~ScalarConverter();
 };
 
