@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:21:34 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/29 23:42:30 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/30 01:54:17 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,6 @@ int	checkCharacter(std::string input)
 		if (index == (int)input.length())
 			return (1);
 	}
-	// else if (input[index] && isNonPrintable(input[index]))
-	// {
-	// 	index++;
-	// 	while (input[index] && isWhiteSpaces(input[index]))
-	// 		index++;
-	// 	if (index == (int)input.length())
-	// 		return (-1);
-	// }
 	return (0);
 }
 
@@ -154,6 +146,8 @@ int	checkInput(std::string input)
 		std::cout << "INVALID ARGUMENTS!" << std::endl;
 		exit(1);
 	}
+	if (input == "nanf" || input == "nan")
+		return 5;
 	if (checkCharacter(input))
 		return (checkCharacter(input));
 	else if (checkNumericality(input))
@@ -161,9 +155,72 @@ int	checkInput(std::string input)
 	return (0);
 }
 
+void	ScalarConverter::convertData(int type, std::string input)
+{
+	switch (type)
+	{
+		case 1:
+			c = input[0];
+			iNumber = static_cast <int> (c);
+			fNumber = static_cast <float> (c);
+			dNumber = static_cast <double> (c);
+			break;
+		case 2:
+			iNumber = std::stoi(input);
+			c = static_cast <char> (iNumber);
+			fNumber = static_cast <float> (iNumber);
+			dNumber = static_cast <double> (iNumber);
+			break;
+		case 3:
+			fNumber = std::stof(input);
+			c = static_cast <char> (fNumber);
+			iNumber = static_cast <int> (fNumber);
+			dNumber = static_cast <double> (fNumber);
+			break;
+		case 4:
+			dNumber = std::stod(input);
+			c = static_cast <char> (dNumber);
+			iNumber = static_cast <int> (dNumber);
+			fNumber = static_cast <float> (dNumber);
+			break;
+	}
+}
+
+void	ScalarConverter::print(std::string input)
+{
+	if (input != "nanf" && input != "nan")
+	{
+		if (isPrintable(c))
+			std::cout << "char: " << c << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << iNumber << std::endl;
+		std::cout << "float: " << std::setprecision(1) << std::fixed << fNumber << 'f' << std::endl;
+		std::cout << "double: " << std::setprecision(1) << std::fixed << dNumber << std::endl;
+	}
+	else
+	{
+		std::cout << "char: " << "impossible" << std::endl;
+        std::cout << "int: " << "impossible" << std::endl;
+		std::cout << "float: " << "nanf" << std::endl;
+		std::cout << "double: " << "nan" << std::endl;   
+	}
+}
+
 void	ScalarConverter::convert(std::string literalForm)
 {
-	std::cout << checkInput(literalForm) << std::endl;
+	try 
+	{
+		int type = checkInput(literalForm);
+		if (!type)
+			throw (type);
+		convertData(type, literalForm);
+		print(literalForm);
+	}
+	catch (int num)
+	{
+		std::cerr << "INVALID ARGUMENTS!" << '\n';
+	}
 }
 
 ScalarConverter::~ScalarConverter()
