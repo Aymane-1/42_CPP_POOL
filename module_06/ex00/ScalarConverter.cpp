@@ -6,12 +6,11 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:21:34 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/30 01:54:17 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:45:48 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <iomanip>
 
 ScalarConverter::ScalarConverter()
 {
@@ -29,42 +28,35 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &obj)
 	return (*this);
 }
 
-int	isWhiteSpaces(char c)
+int	ScalarConverter::isWhiteSpaces(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
 }
 
-int	isNumeric(char c)
+int	ScalarConverter::isNumeric(char c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }
 
-int	isPrintable(char c)
+int	ScalarConverter::isPrintable(char c)
 {
 	if (c >= 32 && c <= 127)
 		return (1);
 	return (0);
 }
 
-int	isNonPrintable(char c)
-{
-	if (c >= 0 && c <= 31)
-		return (1);
-	return (0);
-}
-
-int	checkCharacter(std::string input)
+int	ScalarConverter::checkCharacter(std::string input)
 {
 	int index = 0;
 	while (input[index] && isWhiteSpaces(input[index]))
 		index++;
-	if (index == 1)
+	if (index == (int)input.length())
 		return (1);
-	if (input[index] && !isNumeric(input[index]) && isPrintable(input[index]))
+	if (input[index] && !isNumeric(input[index]))
 	{
 		index++;
 		while (input[index] && isWhiteSpaces(input[index]))
@@ -75,7 +67,7 @@ int	checkCharacter(std::string input)
 	return (0);
 }
 
-int	checkInteger(std::string input, int index)
+int	ScalarConverter::checkInteger(std::string input, int index)
 {
 	if (!isNumeric(input[index - 1]))
 		return (0);
@@ -86,7 +78,7 @@ int	checkInteger(std::string input, int index)
 	return (0);
 }
 
-int	checkFloat(std::string input, int index)
+int	ScalarConverter::checkFloat(std::string input, int index)
 {
 	if (input[index] == '.')
 	{
@@ -105,7 +97,7 @@ int	checkFloat(std::string input, int index)
 	return (0);
 }
 
-int	checkDouble(std::string input, int index)
+int	ScalarConverter::checkDouble(std::string input, int index)
 {
 	if (input[index] == '.')
 	{
@@ -120,7 +112,7 @@ int	checkDouble(std::string input, int index)
 	return (0);
 }
 
-int	checkNumericality(std::string input)
+int	ScalarConverter::checkNumericality(std::string input)
 {
 	int index = 0;
 	while (input[index] && isWhiteSpaces(input[index]))
@@ -139,17 +131,14 @@ int	checkNumericality(std::string input)
 	return (0);
 }
 
-int	checkInput(std::string input)
+int	ScalarConverter::checkInput(std::string input)
 {
 	if (input.empty())
-	{
-		std::cout << "INVALID ARGUMENTS!" << std::endl;
-		exit(1);
-	}
-	if (input == "nanf" || input == "nan")
-		return 5;
+		return (0);
 	if (checkCharacter(input))
 		return (checkCharacter(input));
+	if (input.length() > 9)
+			return (checkRange(input));
 	else if (checkNumericality(input))
 		return (checkNumericality(input));
 	return (0);
@@ -157,41 +146,57 @@ int	checkInput(std::string input)
 
 void	ScalarConverter::convertData(int type, std::string input)
 {
-	switch (type)
-	{
-		case 1:
-			c = input[0];
-			iNumber = static_cast <int> (c);
-			fNumber = static_cast <float> (c);
-			dNumber = static_cast <double> (c);
-			break;
-		case 2:
-			iNumber = std::stoi(input);
-			c = static_cast <char> (iNumber);
-			fNumber = static_cast <float> (iNumber);
-			dNumber = static_cast <double> (iNumber);
-			break;
-		case 3:
-			fNumber = std::stof(input);
-			c = static_cast <char> (fNumber);
-			iNumber = static_cast <int> (fNumber);
-			dNumber = static_cast <double> (fNumber);
-			break;
-		case 4:
-			dNumber = std::stod(input);
-			c = static_cast <char> (dNumber);
-			iNumber = static_cast <int> (dNumber);
-			fNumber = static_cast <float> (dNumber);
-			break;
-	}
+		int i = 0;
+		std::istringstream literalForm(input);
+		switch (type)
+		{
+			case 1:
+				while (input[i])
+				{
+					if (!isWhiteSpaces(input[i]))
+						break;
+					i++;
+				}
+				c = input[i];
+				iNumber = static_cast <int> (c);
+				fNumber = static_cast <float> (c);
+				dNumber = static_cast <double> (c);
+				break;
+			case 2:
+				iNumber = std::stoi(input);
+				c = static_cast <char> (iNumber);
+				fNumber = static_cast <float> (iNumber);
+				dNumber = static_cast <double> (iNumber);
+				break;
+			case 3:
+				literalForm >> fNumber;
+				c = static_cast <char> (fNumber);
+				iNumber = static_cast <int> (fNumber);
+				dNumber = static_cast <double> (fNumber);
+				break;
+			case 4:
+				literalForm >> dNumber;
+				c = static_cast <char> (dNumber);
+				iNumber = static_cast <int> (dNumber);
+				fNumber = static_cast <float> (dNumber);
+				break;
+		}
+}
+
+int		ScalarConverter::isPseudoLiteral(std::string input)
+{
+	if (input == "nan" || input == "nanf" || input == "-inf" \
+		|| input == "+inf" || input == "-inff" || input == "+inff")
+		return (1);
+	return (0);
 }
 
 void	ScalarConverter::print(std::string input)
 {
-	if (input != "nanf" && input != "nan")
+	if (!isPseudoLiteral(input))
 	{
 		if (isPrintable(c))
-			std::cout << "char: " << c << std::endl;
+			std::cout << "char: '" << c << "'" << std::endl;
 		else
 			std::cout << "char: Non displayable" << std::endl;
 		std::cout << "int: " << iNumber << std::endl;
@@ -207,11 +212,31 @@ void	ScalarConverter::print(std::string input)
 	}
 }
 
+int		ScalarConverter::checkRange(std::string input)
+{
+	try
+	{
+		int	testInt = std::stoi(input);  // to test if stoi throws an out of range exception 
+		(void)testInt;
+		return (1);
+	}
+	catch(const std::exception& e)
+	{
+		return (0);
+	}
+}
+
 void	ScalarConverter::convert(std::string literalForm)
 {
+	int type = 5;
 	try 
 	{
-		int type = checkInput(literalForm);
+		if (isPseudoLiteral(literalForm))
+		{
+			print(literalForm);
+			return ;
+		}
+		type = checkInput(literalForm);
 		if (!type)
 			throw (type);
 		convertData(type, literalForm);
@@ -219,7 +244,7 @@ void	ScalarConverter::convert(std::string literalForm)
 	}
 	catch (int num)
 	{
-		std::cerr << "INVALID ARGUMENTS!" << '\n';
+		std::cerr << "INVALID ARGUMENTS!" << std::endl;
 	}
 }
 
