@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:21:34 by aechafii          #+#    #+#             */
-/*   Updated: 2023/05/30 19:45:48 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:50:01 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	ScalarConverter::checkFloat(std::string input, int index)
 			index++;
 			while (input[index] && isWhiteSpaces(input[index]))
 				index++;
-		if (index == (int)input.length())
-			return (1);
+			if (index == (int)input.length())
+				return (1);
 		}
 	}
 	return (0);
@@ -137,16 +137,26 @@ int	ScalarConverter::checkInput(std::string input)
 		return (0);
 	if (checkCharacter(input))
 		return (checkCharacter(input));
-	if (input.length() > 9)
-			return (checkRange(input));
+	if (!checkRange(input))
+			return (-1);
 	else if (checkNumericality(input))
 		return (checkNumericality(input));
 	return (0);
 }
 
+std::string	ScalarConverter::getRawFloat(std::string &input)
+{
+	int i = 0;
+	while (input[i] && input[i] != 'f')
+		i++;
+	return (input = input.substr(0, i - 1));
+}
+
 void	ScalarConverter::convertData(int type, std::string input)
 {
 		int i = 0;
+		if (type == 3)
+			input = getRawFloat(input);
 		std::istringstream literalForm(input);
 		switch (type)
 		{
@@ -159,6 +169,8 @@ void	ScalarConverter::convertData(int type, std::string input)
 				}
 				c = input[i];
 				iNumber = static_cast <int> (c);
+				if (iNumber == INT_MIN)
+					overflowFlag = 1;
 				fNumber = static_cast <float> (c);
 				dNumber = static_cast <double> (c);
 				break;
@@ -172,12 +184,16 @@ void	ScalarConverter::convertData(int type, std::string input)
 				literalForm >> fNumber;
 				c = static_cast <char> (fNumber);
 				iNumber = static_cast <int> (fNumber);
+				if (iNumber == INT_MIN)
+					overflowFlag = 1;
 				dNumber = static_cast <double> (fNumber);
 				break;
 			case 4:
 				literalForm >> dNumber;
 				c = static_cast <char> (dNumber);
 				iNumber = static_cast <int> (dNumber);
+				if (iNumber == INT_MIN)
+					overflowFlag = 1;
 				fNumber = static_cast <float> (dNumber);
 				break;
 		}
@@ -199,7 +215,10 @@ void	ScalarConverter::print(std::string input)
 			std::cout << "char: '" << c << "'" << std::endl;
 		else
 			std::cout << "char: Non displayable" << std::endl;
-		std::cout << "int: " << iNumber << std::endl;
+		if (overflowFlag)
+			std::cout << "int: Overflow occured!" << std::endl;
+		else
+			std::cout << "int: " << iNumber << std::endl;
 		std::cout << "float: " << std::setprecision(1) << std::fixed << fNumber << 'f' << std::endl;
 		std::cout << "double: " << std::setprecision(1) << std::fixed << dNumber << std::endl;
 	}
@@ -216,7 +235,10 @@ int		ScalarConverter::checkRange(std::string input)
 {
 	try
 	{
-		int	testInt = std::stoi(input);  // to test if stoi throws an out of range exception 
+		for(int i = 0; i < (int)input.length(); i++) // ignore range test if the input is not numerical.
+			if (input[i] != '-' && input[i] != '+' && !isNumeric(input[i]) && !isWhiteSpaces(input[i]))
+				return (1);
+		int	testInt = std::stoi(input); // to test if stoi throws an out of range exception
 		(void)testInt;
 		return (1);
 	}
@@ -237,14 +259,17 @@ void	ScalarConverter::convert(std::string literalForm)
 			return ;
 		}
 		type = checkInput(literalForm);
-		if (!type)
+		if (type <= 0)
 			throw (type);
 		convertData(type, literalForm);
 		print(literalForm);
 	}
 	catch (int num)
 	{
-		std::cerr << "INVALID ARGUMENTS!" << std::endl;
+		if (!num)
+			std::cerr << "INVALID ARGUMENTS!" << std::endl;
+		else
+			std::cerr << "OUT OF RANGE ARGUMENTS!" << std::endl;
 	}
 }
 
