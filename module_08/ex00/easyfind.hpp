@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:36:22 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/02 23:03:07 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 04:45:00 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	easyfind(containerT data, int num)
 	if (it != data.end())		
 		std::cout << "Element found." << std::endl;
 	else
-		std::cout << "Element not found!" << std::endl;
+		throw std::invalid_argument("Element not found!");
 }
 
 #endif
