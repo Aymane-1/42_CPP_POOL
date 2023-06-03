@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 00:29:47 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/03 02:49:01 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 23:55:21 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main()
 {
+	Span sequence2(8);
 	try
 	{
 		Span sequence(5);
@@ -36,18 +37,22 @@ int main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
-		Span sequence2(0);
-		sequence2.containerFiller(5);
-		std::cout << "vector elements: ";
-		sequence2.displayVector();
-		std::cout << "\n";
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+	// try
+	// {
+	// 	std::cout << "\n------------------------------------\n" << std::endl;
+	// 	Span sequence2(50000);
+	// 	std::vector<int> sequence3;
+	// 	for(int i = 0; i < 50000; i++)
+	// 		sequence3.push_back(i);
+	// 	sequence2.containerFiller(sequence3.begin(), sequence3.end());
+	// 	std::cout << "vector elements: ";
+	// 	sequence2.displayVector();
+	// 	std::cout << "\nsequence3 size: " << sequence2.getContainer().size() << std::endl;
+	// 	std::cout << "\n";
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
 	return (0);
 }

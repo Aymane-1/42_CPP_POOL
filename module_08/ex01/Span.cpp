@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 23:32:26 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/03 04:54:58 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:53:49 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,25 @@ void	Span::shortestSpan()
 
 void	Span::containerFiller(std::vector<int>::iterator start, std::vector<int>::iterator end)
 {
-	
 	if (int_v.size() == N)
 		throw std::runtime_error("Container is full!");
-	else
+	std::vector<int>::iterator my_iterator = start;
+	while (my_iterator != end)
 	{
-		std::vector<int>::iterator my_iterator = start;
-		for (int i = 0; my_iterator != end; i < N)
-		{
-			int_v[i] = *my_iterator;
-			i++;
-			my_iterator++;   
-		}
+		addNumber(*my_iterator);
+		my_iterator++;   
 	}
+}
+
+std::vector<int>	&Span::getContainer()
+{
+	return (int_v);
 }
 
 void	Span::displayVector()
 {
 	for(int i = 0; i < (int)int_v.size(); i++)
-		std::cout << "[" << int_v[i] <<  "] ";
+		std::cout << "[" << int_v[i] <<  "] ";	
 }
 
 Span::~Span()

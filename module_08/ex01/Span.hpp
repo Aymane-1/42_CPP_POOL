@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 23:26:56 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/03 04:50:06 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:34:41 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ class Span{
 		Span();
 		Span(unsigned int N);
 		Span(const Span &obj);
-		Span	&operator=(const Span &obj);
-		void	addNumber(int number);
-		void	shortestSpan();
-		void	longestSpan();
-		void	containerFiller(std::vector<int>::iterator start, std::vector<int>::iterator end);
-		void	displayVector();
+		Span				&operator=(const Span &obj);
+		void				addNumber(int number);
+		void				shortestSpan();
+		void				longestSpan();
+		void				containerFiller(std::vector<int>::iterator start, std::vector<int>::iterator end);
+		void				displayVector();
+		std::vector<int>	&getContainer();
 		~Span();
 };
 
