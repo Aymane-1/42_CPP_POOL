@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 23:32:26 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/03 02:51:39 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 04:54:58 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,21 @@ void	Span::shortestSpan()
 	std::cout << "shortest distance is: " << shortestSpan << std::endl;
 }
 
-void	Span::containerFiller(int number)
+void	Span::containerFiller(std::vector<int>::iterator start, std::vector<int>::iterator end)
 {
-	for (int my_iterator : int_v)
-		addNumber(2);
+	
+	if (int_v.size() == N)
+		throw std::runtime_error("Container is full!");
+	else
+	{
+		std::vector<int>::iterator my_iterator = start;
+		for (int i = 0; my_iterator != end; i < N)
+		{
+			int_v[i] = *my_iterator;
+			i++;
+			my_iterator++;   
+		}
+	}
 }
 
 void	Span::displayVector()

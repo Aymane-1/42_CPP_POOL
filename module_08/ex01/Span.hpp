@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 23:26:56 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/03 02:45:42 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/03 04:50:06 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class Span{
 		void	addNumber(int number);
 		void	shortestSpan();
 		void	longestSpan();
-		void	containerFiller(int number);
+		void	containerFiller(std::vector<int>::iterator start, std::vector<int>::iterator end);
 		void	displayVector();
 		~Span();
 };
