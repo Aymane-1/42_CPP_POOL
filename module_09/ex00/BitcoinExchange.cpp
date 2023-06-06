@@ -6,7 +6,7 @@
 /*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 21:42:14 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/06 10:15:37 by aymane           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:50:30 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	processInput(char *argument)
 	while(std::getline(inputFile, line))
 	{
 		int pipeIndex = line.find("|");
+		if (line.empty())
+			continue;
 		processLine(line, pipeIndex);
 	}
 	
@@ -96,8 +98,17 @@ int checkDate(std::string line)
 	while (isWhiteSpaces(line[startIndex]))
 		startIndex++;
 	std::string date = line.substr(startIndex, line.find("|"));
-	whiteSpacesTrimmer(date);
-	if ((date[4] != '-' && date[7] != '-') || !isdigit(date[(int)date.length() - 1]))
+	if ((date[4] != '-' && date[7] != '-'))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;	
+		return (-1);
+	}
+	startIndex += 8;
+	while (date[startIndex] && isdigit(line[startIndex]))
+			startIndex++;
+	while (date[startIndex] && isWhiteSpaces(line[startIndex]))
+			startIndex++;
+	if (startIndex != (int)date.length())
 	{
 		std::cout << "Error: bad input => " << line << std::endl;	
 		return (-1);
@@ -113,7 +124,7 @@ int checkDate(std::string line)
 	if (day == 29 && month == 2 && \
 		!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
 	{
-		std::cout << "Error: bad input => " << line << std::endl;	
+		std::cout << "Error: Non-existant date => " << line << std::endl;	
 		return (-1);
 	}
 	return (0);
@@ -121,6 +132,7 @@ int checkDate(std::string line)
 
 void	whiteSpacesTrimmer(std::string &date)
 {
+	
 	for (int i = 0; i < (int)date.length(); i++)
 		if (date[i] == ' ')
 			date.erase(i);
@@ -154,8 +166,18 @@ int			checkValue(std::string line)
 	while (isWhiteSpaces(line[startIndex]))
 		startIndex++;
 	std::string	sValue = line.substr(startIndex, line.length());
-	whiteSpacesTrimmer(sValue);
-	if (!isdigit(sValue[(int)sValue.length() - 1]) && !isFloat(sValue))
+	startIndex = 0;
+	while (sValue[startIndex] && isdigit(sValue[startIndex]))
+		startIndex++;
+	if (sValue[startIndex] == '.')
+	{
+		startIndex++;	
+		while (sValue[startIndex] && isdigit(sValue[startIndex]))
+			startIndex++;
+	}
+	while (sValue[startIndex] && isWhiteSpaces(sValue[startIndex]))
+			startIndex++;
+	if (startIndex != (int)sValue.length() && !isFloat(sValue))
 	{
 		std::cout << "Error: bad input => " << line << std::endl;	
 		return (-1);
@@ -176,5 +198,5 @@ int			checkValue(std::string line)
 
 void	getExchangeRate(std::string line)
 {
-	
+	(void)line;
 }
