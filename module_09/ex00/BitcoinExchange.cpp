@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 21:42:14 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/06 04:52:57 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:15:37 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ void	processLine(std::string line, int pipeIndex)
 		std::cout << "Error: bad input => " << line << std::endl;
 	else if (pipeIndex)
 	{
-		if (checkSyntax(line) == -1 || checkDate(line) == -1)
-			std::cout << "Error: bad input => " << line << std::endl;
+		if (checkSyntax(line) == -1 || checkDate(line) == -1 || checkValue(line) == -1)
+			return ;
+		else
+			getExchangeRate(line);
 	}
 }
 
@@ -79,24 +81,100 @@ int	checkSyntax(std::string line)
 	for (int i = 0; i < (int)line.length(); i++)
 	{
 		if (!isdigit(line[i]) && !isWhiteSpaces(line[i]) \
-				&& line[i] != '-' && line[i] != '|' && line[i] != '.')
+				&& line[i] != '-' && line[i] != '|' && line[i] != '.' && line[i] != 'f')
+		{
+			std::cout << "Error: bad input => " << line << std::endl;	
 			return (-1);
+		}
 	}
-	return (1);
+	return (0);
 }
 
 int checkDate(std::string line)
 {
-	std::string year = line.substr(0, line.find("|"));
-	whiteSpacesTrimmer(year);
+	int startIndex = 0;
+	while (isWhiteSpaces(line[startIndex]))
+		startIndex++;
+	std::string date = line.substr(startIndex, line.find("|"));
+	whiteSpacesTrimmer(date);
+	if ((date[4] != '-' && date[7] != '-') || !isdigit(date[(int)date.length() - 1]))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;	
+		return (-1);
+	}
+	int year = std::stoi(date.substr(0, 4));
+	int month = std::stoi(date.substr(5, 7));
+	int day = std::stoi(date.substr(8, (int)date.length()));
+	if (year < 2009 || month > 12 || month < 1 || day < 1 || day > 31)
+	{
+		std::cout << "Error: bad input => " << line << std::endl;	
+		return (-1);
+	}
+	if (day == 29 && month == 2 && \
+		!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;	
+		return (-1);
+	}
 	return (0);
 }
 
 void	whiteSpacesTrimmer(std::string &date)
 {
 	for (int i = 0; i < (int)date.length(); i++)
-	{
 		if (date[i] == ' ')
 			date.erase(i);
+}
+
+int	isFloat(std::string input)
+{
+	int index = 0;
+	while (input[index] && isdigit(input[index]))
+		index++;
+	if (input[index] == '.')
+	{
+		index++;
+		while (input[index] && isdigit(input[index]))
+			index++;
+		if (input[index] == 'f')
+		{
+			index++;
+			while (input[index] && isWhiteSpaces(input[index]))
+				index++;
+			if (index == (int)input.length())
+				return (1);
+		}
 	}
+	return (0);
+}
+
+int			checkValue(std::string line)
+{
+	int startIndex = line.find("|") + 1;
+	while (isWhiteSpaces(line[startIndex]))
+		startIndex++;
+	std::string	sValue = line.substr(startIndex, line.length());
+	whiteSpacesTrimmer(sValue);
+	if (!isdigit(sValue[(int)sValue.length() - 1]) && !isFloat(sValue))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;	
+		return (-1);
+	}
+	double value = std::atof(sValue.c_str());
+	if (value < 1)
+	{
+		std::cout << "Error: not a positive number." << std::endl;	
+		return (-1);
+	}
+	if (value > 1000)
+	{
+		std::cout << "Error: too large number." << std::endl;	
+		return (-1);
+	}
+	return (0);
+}
+
+void	getExchangeRate(std::string line)
+{
+	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aymane <aymane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:40:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/06 04:51:18 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:14:59 by aymane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void		processInput(char *argument);
 void		processLine(std::string line, int pipeIndex);
 int			checkSyntax(std::string line);
 int			checkDate(std::string line);
+int			checkValue(std::string line);
 void		whiteSpacesTrimmer(std::string &date);
+int			isFloat(std::string input);
+void		getExchangeRate(std::string line);
 
 #endif
