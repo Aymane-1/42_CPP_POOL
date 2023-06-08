@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:44:10 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/06 02:30:04 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:07:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int main(int argc, char **argv)
 			std::cout << "Error: could not open file." << std::endl;
 			return (0);
 		}
-		std::map<std::string, double> data;
+		std::map<std::string, double, std::greater<std::string> > data;
 		storeData(data);
 		// printMap(data);
-		processInput(argv[1]);
+		processInput(argv[1], data);
 	}
 	catch(const std::exception& e)
 	{
