@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:40:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/08 16:26:24 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:33:49 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void				processLine(std::string line, int pipeIndex, std::map<std::string, doubl
 void				getExchangeRate(std::string date, double value, std::map<std::string, double, std::greater<std::string> > &data);
 void				whiteSpacesSkipper(std::string str, size_t &index);
 void				whiteSpacesEraser(std::string &str, size_t index);
-int					isWhiteSpaces(char c);
 int					checkHeader(std::string line);
 int					checkSyntax(std::string line);
 double				checkValue(std::string line);
 std::string			checkDate(std::string line);
+int					checkDateCompliance(std::string line, int year, int month, int day);
 int					isFloat(std::string input);
+int					isWhiteSpaces(char c);
 
 #endif

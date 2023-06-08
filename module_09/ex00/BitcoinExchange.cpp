@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 21:42:14 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/08 16:28:17 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:43:06 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ void	processLine(std::string line, int pipeIndex, std::map<std::string, double, 
 		std::cout << "Error: bad input => " << line << std::endl;
 	else if (pipeIndex)
 	{
-		if (checkSyntax(line) == -1 || checkDate(line) == "Error" || checkValue(line) == -1)
+		std::string		date = checkDate(line);
+		double			value = checkValue(line);
+		if (checkSyntax(line) == -1 || date == "Error" || value == -1)
 			return ;
 		else
-			getExchangeRate(checkDate(line), checkValue(line), data);
+			getExchangeRate(date, value, data);
 	}
 }
 
@@ -118,12 +120,11 @@ int	checkHeader(std::string line)
 	if (header == "date | value")
 		return (0);
 	return (-1);
-	
 }
 
 int	checkSyntax(std::string line)
 {
-	for (int i = 0; i < (int)line.length(); i++)
+	for (size_t i = 0; i < line.length(); i++)
 	{
 		if (!isdigit(line[i]) && !isWhiteSpaces(line[i]) \
 				&& line[i] != '-' && line[i] != '|' && line[i] != '.' && line[i] != 'f')
@@ -157,7 +158,7 @@ std::string checkDate(std::string line)
 	size_t endIndex =  hyphenIndex + 6;
 	startIndex = endIndex;
 	whiteSpacesSkipper(date, startIndex);
-	if (startIndex != (size_t)date.length())
+	if (startIndex != date.length())
 	{
 		std::cout << "Error: bad input => " << line << std::endl;	
 		return ("Error");
@@ -167,24 +168,35 @@ std::string checkDate(std::string line)
 	int year = std::stoi(date.substr(i, date.find("-")));
 	int month = std::stoi(date.substr(date.find("-") + 1, date.find("-") + 2));
 	int day = std::stoi(date.substr(date.find("-") + 4, endIndex));
+	if (checkDateCompliance(line, year, month, day) == -1)
+		return ("Error");
+	return (date.substr(i, endIndex));
+}
+
+int		checkDateCompliance(std::string line, int year, int month, int day)
+{
 	if (year < 2009 || month > 12 || month < 1 || day < 1 || day > 31)
 	{
 		std::cout << "Error: bad input => " << line << std::endl;	
-		return ("Error");
+		return (-1);
+	}
+	if (day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
+	{
+		std::cout << "Error: the month in question has only 30 days! => " << line << std::endl;	
+		return (-1);
 	}
 	if (day == 29 && month == 2 && \
 		!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
 	{
-		std::cout << "Error: Non-existant date => " << line << std::endl;	
-		return ("Error");
+		std::cout << "Error: Non-existant date! => " << line << std::endl;	
+		return (-1);
 	}
-	return (date.substr(i, endIndex));
+	return (0);
 }
-
 
 int	isFloat(std::string input)
 {
-	int index = 0;
+	size_t index = 0;
 	while (input[index] && isdigit(input[index]))
 		index++;
 	if (input[index] == '.')
@@ -195,9 +207,8 @@ int	isFloat(std::string input)
 		if (input[index] == 'f')
 		{
 			index++;
-			while (input[index] && isWhiteSpaces(input[index]))
-				index++;
-			if (index == (int)input.length())
+			whiteSpacesSkipper(input, index);
+			if (index == input.length())
 				return (1);
 		}
 	}
@@ -223,7 +234,6 @@ double			checkValue(std::string line)
 	whiteSpacesSkipper(sValue, startIndex);
 	if (startIndex != sValue.length() && !isFloat(sValue))
 	{
-		std::cout << "here" << std::endl;
 		std::cout << "Error: bad input => " << line << std::endl;	
 		return (-1);
 	}
@@ -246,5 +256,5 @@ void	getExchangeRate(std::string date, double value, std::map<std::string, doubl
 	whiteSpacesEraser(date, date.length() - 1);
 	std::map<std::string, double, std::greater<std::string> >::iterator it = data.lower_bound(date);
 	if (it != data.end())
-		std::cout << it->first << " => " << value << " = "  << it->second * value << std::endl;		
+		std::cout << date << " => " << value << " = "  << it->second * value << std::endl;		
  }
