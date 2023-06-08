@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:40:59 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/08 18:33:49 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:58:57 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void				processInput(char *argument, std::map<std::string, double, std::greater<
 void				processLine(std::string line, int pipeIndex, std::map<std::string, double, std::greater<std::string> > &data);
 void				getExchangeRate(std::string date, double value, std::map<std::string, double, std::greater<std::string> > &data);
 void				whiteSpacesSkipper(std::string str, size_t &index);
+void				digitsSkipper(std::string str, size_t &index);
+void				alphaSkipper(std::string str, size_t &index);
 void				whiteSpacesEraser(std::string &str, size_t index);
 int					checkHeader(std::string line);
 int					checkSyntax(std::string line);

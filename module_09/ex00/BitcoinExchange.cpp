@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 21:42:14 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/08 18:43:06 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:08:00 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int	isWhiteSpaces(char c)
 void	whiteSpacesSkipper(std::string str, size_t &index)
 {
 	while (str[index] && isWhiteSpaces(str[index]))
+		index++;
+}
+
+void	digitsSkipper(std::string str, size_t &index)
+{
+	while (str[index] && isdigit(str[index]))
+		index++;
+}
+
+void	alphaSkipper(std::string str, size_t &index)
+{
+	while (str[index] && isalpha(str[index]))
 		index++;
 }
 
@@ -80,7 +92,6 @@ void		processInput(char *argument, std::map<std::string, double, std::greater<st
 		int pipeIndex = line.find("|");
 		processLine(line, pipeIndex, data);
 	}
-	
 }
 
 void	processLine(std::string line, int pipeIndex, std::map<std::string, double, std::greater<std::string> > &data)
@@ -98,22 +109,19 @@ void	processLine(std::string line, int pipeIndex, std::map<std::string, double, 
 	}
 }
 
-
 int	checkHeader(std::string line)
 {
 	size_t startIndex = 0;
 	whiteSpacesEraser(line, line.length() - 1);
 	whiteSpacesSkipper(line, startIndex);
 	size_t endIndex = startIndex;
-	while (isalpha(line[endIndex]))
-		endIndex++;
+	alphaSkipper(line, endIndex);
 	std ::string part1 = line.substr(startIndex, endIndex);
 	whiteSpacesEraser(part1, part1.length() - 1);
 	startIndex = line.find("|") + 1;
 	whiteSpacesSkipper(line, startIndex);
 	endIndex = startIndex;
-	while (isalpha(line[endIndex]))
-		endIndex++;
+	alphaSkipper(line, endIndex);
 	std ::string part2 = line.substr(startIndex, endIndex);
 	whiteSpacesEraser(part2, part2.length() - 1);
 	std::string header = part1 + " | " + part2;
@@ -128,10 +136,7 @@ int	checkSyntax(std::string line)
 	{
 		if (!isdigit(line[i]) && !isWhiteSpaces(line[i]) \
 				&& line[i] != '-' && line[i] != '|' && line[i] != '.' && line[i] != 'f')
-		{
-			std::cout << "Error: bad input => " << line << std::endl;	
-			return (-1);
-		}
+			return (std::cout << "Error: bad input => " << line << std::endl, -1);
 	}
 	return (0);
 }
@@ -141,28 +146,18 @@ std::string checkDate(std::string line)
 	size_t startIndex = 0;
 	size_t pipeIndex = line.find("|");
 	if (pipeIndex == std::string::npos)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;	
-		return ("Error"); 
-	}
+		return (std::cout << "Error: bad input => " << line << std::endl, "Error");
 	std::string date = line.substr(0, pipeIndex - 1);
 	int hyphenIndex = date.find("-");
 	if ((date[hyphenIndex] != '-' && date[hyphenIndex + 3] != '-'))
-	{
-		std::cout << "Error: bad input => " << line << std::endl;	
-		return ("Error"); 
-	}
+		return (std::cout << "Error: bad input => " << line << std::endl, "Error");
 	whiteSpacesSkipper(date, startIndex);
-	while (date[startIndex] && isdigit(date[startIndex]))
-		startIndex++;
+	digitsSkipper(date, startIndex);
 	size_t endIndex =  hyphenIndex + 6;
 	startIndex = endIndex;
 	whiteSpacesSkipper(date, startIndex);
 	if (startIndex != date.length())
-	{
-		std::cout << "Error: bad input => " << line << std::endl;	
-		return ("Error");
-	}
+		return (std::cout << "Error: bad input => " << line << std::endl, "Error");
 	size_t i = 0;
 	whiteSpacesSkipper(date, i);
 	int year = std::stoi(date.substr(i, date.find("-")));
@@ -176,34 +171,23 @@ std::string checkDate(std::string line)
 int		checkDateCompliance(std::string line, int year, int month, int day)
 {
 	if (year < 2009 || month > 12 || month < 1 || day < 1 || day > 31)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: bad input => " << line << std::endl, -1);
 	if (day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
-	{
-		std::cout << "Error: the month in question has only 30 days! => " << line << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: the month in question has only 30 days! => " << line << std::endl,	-1);
 	if (day == 29 && month == 2 && \
 		!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
-	{
-		std::cout << "Error: Non-existant date! => " << line << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: Non-existant date! => " << line << std::endl, -1);
 	return (0);
 }
 
 int	isFloat(std::string input)
 {
 	size_t index = 0;
-	while (input[index] && isdigit(input[index]))
-		index++;
+	digitsSkipper(input, index);
 	if (input[index] == '.')
 	{
 		index++;
-		while (input[index] && isdigit(input[index]))
-			index++;
+		digitsSkipper(input, index);
 		if (input[index] == 'f')
 		{
 			index++;
@@ -223,31 +207,20 @@ double			checkValue(std::string line)
 	startIndex = 0;
 	if (sValue[startIndex] == '-')
 		startIndex++;
-	while (sValue[startIndex] && isdigit(sValue[startIndex]))
-		startIndex++;
+	digitsSkipper(sValue, startIndex);
 	if (sValue[startIndex] == '.')
 	{
 		startIndex++;	
-		while (sValue[startIndex] && isdigit(sValue[startIndex]))
-			startIndex++;
+		digitsSkipper(sValue, startIndex);
 	}
 	whiteSpacesSkipper(sValue, startIndex);
 	if (startIndex != sValue.length() && !isFloat(sValue))
-	{
-		std::cout << "Error: bad input => " << line << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: bad input => " << line << std::endl, -1);
 	double value = std::atof(sValue.c_str());
 	if (value < 1)
-	{
-		std::cout << "Error: not a positive number." << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: not a positive number." << std::endl, -1);
 	if (value > 1000)
-	{
-		std::cout << "Error: too large number." << std::endl;	
-		return (-1);
-	}
+		return (std::cout << "Error: too large number." << std::endl, -1);
 	return (value);
 }
 
