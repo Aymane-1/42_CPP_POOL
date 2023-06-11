@@ -1,0 +1,33 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    notes.txt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/09 17:49:09 by aechafii          #+#    #+#              #
+#    Updated: 2023/06/09 18:49:01 by aechafii         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+ so in order to make an explanation on how this FORD HOHNSON SORT WORKS :
+    let's start with the argument, the argument is a list of unsigned ints so if one of the 
+		numbers given is negative we should throw an error.
+    once we got the full list of the numbers, the first step will be to check the length.
+        if the lenght % 2 == 1, the we need to remove one element and save in till later.
+        else we will move to the second step directly .
+    the second step will be to divide our list of numbers into pairs of two numbers, then sort 
+		each two separately.
+    once it's sorted we will seprate the smallest of each pair in a small list and the biggest 
+		of each pair in a big numbers list.
+    the third step will be to sort one of the two lists and insert the unsorted one 
+		to the sorted one.
+    and last insert the remaining number if it exists.
+
+    we need to be able to use this process for two types of containers in order to check 
+		the difference in time complexity between the two.
+
+
+
+
+    let's start by spliting the array into pairs first and sort them.
