@@ -21,9 +21,9 @@ void								storeData(std::string input, std::vector<int> &arr);
 void								fordJhonson(std::vector<int> &arr);
 std::vector<std::pair<int, int> > 	MakePairs(std::vector<int> &arr);
 void							 	sortPairs(std::vector<std::pair<int, int> > &arr);
-// void	makeSmallestBiggestlists(std::vector<int> &arr);
-// void	sortBiggestList(std::vector<int> &Blist);
-// void	insertSmallestList(std::vector<int> &Smallest, std::vector<int> &Biggest);
+void								divideSequence(std::vector<std::pair<int, int> > arrPairs);
+void								insertPendElements(std::vector<int> &smallestArr, std::vector<int> &biggestArr);
+std::vector<int>					JacobsthalSequence(std::vector<int> smallestArr);
 void								printData(std::vector<int> arr);
 
 // Don't forget to add the last element is array length is odd!

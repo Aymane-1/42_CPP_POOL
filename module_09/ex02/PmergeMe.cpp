@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/14 00:51:01 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:16:24 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,54 +101,44 @@ void		sortPairs(std::vector<std::pair<int, int> > &arr)
 	}
 }
 
-bool		descendOrder(const std::pair<int, int> &a, const std::pair<int, int> &b)
+bool	descendOrder(const std::pair<int, int> &a, const std::pair<int, int> &b)
 {
 	return (a.second < b.second);
 }
 
-void	makeSmallestBiggestlists(std::vector<std::pair<int, int> > arrPairs)
+void	divideSequence(std::vector<std::pair<int, int> > arrPairs)
 {
-	std::vector<int> smallestArr;
-	std::vector<int> biggestArr;
+	std::vector<int> pendElements;
+	std::vector<int> mainChain;
 	std::vector<std::pair<int, int> >::iterator it = arrPairs.begin();
 	while(it != arrPairs.end())
 	{
-		smallestArr.push_back(it->first);
-		biggestArr.push_back(it->second);
+		pendElements.push_back(it->first);
+		mainChain.push_back(it->second);
 		it++;
 	}
-	insertSmallestList(smallestArr, biggestArr);
+	insertPendElements(pendElements, mainChain);
 }
 
-void		insertSmallestList(std::vector<int> &smallestArr, std::vector<int> &biggestArr)
+void	insertPendElements(std::vector<int> &smallestArr, std::vector<int> &biggestArr)
 {
-	// std::vector<int>::iterator smallestIt = smallestArr.begin();
-	// std::vector<int>::iterator biggestIt  = biggestArr.begin();
-	(void)biggestArr;
-	std::vector<int> jacobthalVec = JacobsthalSequence(smallestArr);
-	std::vector<int>::iterator It  = jacobthalVec.begin();
-	// while(biggestIt != biggestArr.end())
-	// {
-	// 	// biggestArr.insert(biggestArr.begin(), *smallestIt);
-	// 	// smallestArr.erase(smallestIt);
-	// 	biggestIt++;
-	// 	smallestIt++;
-	// }
-	// smallestIt = smallestArr.begin();
-	while(It != jacobthalVec.end())
+	std::vector<int> jacobthalSeq = JacobsthalSequence(smallestArr);
+	std::vector<int>::iterator smallestIt = smallestArr.begin();
+	
+	while(smallestIt != smallestArr.end())
 	{
-		std::cout << *It << " | ";
-		It++;
+		biggestArr.insert(biggestArr.begin(), *smallestIt);
+		smallestIt++;
 	}
 }
 
 std::vector<int>	JacobsthalSequence(std::vector<int> smallestArr)
 {
-	std::vector<int> vec;
-	vec[0] = 0;
-	vec[1] = 1;
+	std::vector<int> vec(smallestArr.size());
+	vec[0] = 3;
+	vec[1] = 5;
 	for(int i = 2; i < (int)smallestArr.size(); i++)
-		vec[i] = (2 * smallestArr[i - 1]) + smallestArr[i - 2];
+		vec[i] = (smallestArr[i - 1]) + (smallestArr[i - 2] * 2);
 	return (vec);
 }
 
@@ -157,5 +147,5 @@ void	fordJhonson(std::vector<int> &arr)
 	std::vector<std::pair<int, int> > 	arrPairs = MakePairs(arr);
 	sortPairs(arrPairs); // sort each pair of [arrPairs] by biggest value.
 	std::sort(arrPairs.begin(), arrPairs.end(), descendOrder); // then sort the [arrPairs] as a whole by biggest value of each of it's pairs.
-	makeSmallestBiggestlists(arrPairs);
+	divideSequence(arrPairs); // create main chain and pend elements
 }
