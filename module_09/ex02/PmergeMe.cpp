@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/14 20:16:24 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:07:34 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ std::vector<std::pair<int, int> > 	MakePairs(std::vector<int> &arr)
 	return (arrPairs);
 }
 
-void		sortPairs(std::vector<std::pair<int, int> > &arr)
+void	sortPairs(std::vector<std::pair<int, int> > &arr)
 {
 	std::vector<std::pair<int, int> >::iterator it = arr.begin();
 	while(it != arr.end())
@@ -120,32 +120,80 @@ void	divideSequence(std::vector<std::pair<int, int> > arrPairs)
 	insertPendElements(pendElements, mainChain);
 }
 
-void	insertPendElements(std::vector<int> &smallestArr, std::vector<int> &biggestArr)
+void	insertPendElements(std::vector<int> &pendElements, std::vector<int> &mainChain)
 {
-	std::vector<int> jacobthalSeq = JacobsthalSequence(smallestArr);
-	std::vector<int>::iterator smallestIt = smallestArr.begin();
-	
-	while(smallestIt != smallestArr.end())
+	(void)mainChain;
+	std::vector<int>	jacobsthalSeq = JacobsthalSequence(pendElements); // jacobsthal sequence
+	// std::vector<int>::iterator 	JSindex = jacobsthalSeq.begin();
+	// std::vector<int>::iterator 	PDindex = pendElements.begin();
+	std::vector<int>::iterator 	itt = jacobsthalSeq.begin();
+	// mainChain.insert(mainChain.begin(), pendElements[std::distance(pendElements.begin(), PDindex)]);
+	// PDindex++;
+	// //------------------------------------------------------------------
+	// std::vector<int>::iterator it = pendElements.begin();
+	// while(it != pendElements.end())
+	// {
+	// 	std::cout << *it << " | ";
+	// 	it++;
+	// }
+	// std::cout << std::endl;
+	// //------------------------------------------------------------------
+	// std::vector<int>::iterator target = mainChain.begin();
+	// while (PDindex != pendElements.end())
+	// {
+	// 	mainChain.insert(target, pendElements[std::distance(pendElements.begin(), PDindex)]);
+		
+	// } 
+	// itt = mainChain.begin();
+	while(itt != jacobsthalSeq.end())
 	{
-		biggestArr.insert(biggestArr.begin(), *smallestIt);
-		smallestIt++;
+		std::cout << *itt << " | ";
+		itt++;
 	}
 }
 
-std::vector<int>	JacobsthalSequence(std::vector<int> smallestArr)
+std::vector<int>	JacobsthalSequence(std::vector<int> pendElements)
 {
-	std::vector<int> vec(smallestArr.size());
-	vec[0] = 3;
-	vec[1] = 5;
-	for(int i = 2; i < (int)smallestArr.size(); i++)
-		vec[i] = (smallestArr[i - 1]) + (smallestArr[i - 2] * 2);
-	return (vec);
+	std::vector<int> rawJacobsthalSeq(pendElements.size());
+	rawJacobsthalSeq[0] = 3;
+	rawJacobsthalSeq[1] = 5;
+	for(int i = 2; i < (int)rawJacobsthalSeq.size(); i++)
+		rawJacobsthalSeq[i] = (rawJacobsthalSeq[i - 1] + (rawJacobsthalSeq[i - 2] * 2));
+	std::vector<int> customJacobsthalSeq(pendElements.size());
+	std::vector<int>::iterator actual = rawJacobsthalSeq.begin();
+	int index = 0;
+	int target = 0;
+	while (actual != rawJacobsthalSeq.end())
+	{
+		std::cout << "out JS insertion -----> " << *actual << std::endl;
+		customJacobsthalSeq.insert(customJacobsthalSeq.begin() + index, *actual);
+		actual++;
+		if (index == 0)
+			customJacobsthalSeq.insert(customJacobsthalSeq.begin() + 1, 2);
+		else
+			target = *(actual - 1) - 1;
+		index++;
+		std::cout << "target --> " << target << std::endl;
+		std::cout << "prev --> " << *(actual - 1) << std::endl;
+		std::cout << "actual --> " << *actual << std::endl;
+		while((target < *(actual - 1) && target > *(actual - 2)))
+		{
+			customJacobsthalSeq.insert(customJacobsthalSeq.begin() + index, target);
+			index++;
+			target--;
+		}
+		std::cout << "end of loop\n";
+		// std::cout << "entry target ---> " << target << std::endl;
+		// std::cout << "entry *actual ---> " << *actual << std::endl;
+		// std::cout << "entry *(actual - 1) ---> " << rawJacobsthalSeq[index] << std::endl;
+	}
+	return (customJacobsthalSeq);
 }
 
 void	fordJhonson(std::vector<int> &arr)
 {                                                      
-	std::vector<std::pair<int, int> > 	arrPairs = MakePairs(arr);
+	std::vector<std::pair<int, int> > 	arrPairs = MakePairs(arr); // create pairs.
 	sortPairs(arrPairs); // sort each pair of [arrPairs] by biggest value.
-	std::sort(arrPairs.begin(), arrPairs.end(), descendOrder); // then sort the [arrPairs] as a whole by biggest value of each of it's pairs.
-	divideSequence(arrPairs); // create main chain and pend elements
+	std::sort(arrPairs.begin(), arrPairs.end(), descendOrder); // then sort the [arrPairs] as a whole by biggest value (the 'second' of each pair).
+	divideSequence(arrPairs); // create main chain and pend elements.
 }
