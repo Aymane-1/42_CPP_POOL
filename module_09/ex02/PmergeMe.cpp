@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/16 23:07:34 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:32:23 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,29 +122,11 @@ void	divideSequence(std::vector<std::pair<int, int> > arrPairs)
 
 void	insertPendElements(std::vector<int> &pendElements, std::vector<int> &mainChain)
 {
-	(void)mainChain;
-	std::vector<int>	jacobsthalSeq = JacobsthalSequence(pendElements); // jacobsthal sequence
-	// std::vector<int>::iterator 	JSindex = jacobsthalSeq.begin();
-	// std::vector<int>::iterator 	PDindex = pendElements.begin();
+	std::vector<int>	jacobsthalSeq = JacobsthalSequence(pendElements); // custom jacobsthal sequence
+	std::vector<int>::iterator 	JSindex = jacobsthalSeq.begin();
+	std::vector<int>::iterator 	PDindex = pendElements.begin();
 	std::vector<int>::iterator 	itt = jacobsthalSeq.begin();
-	// mainChain.insert(mainChain.begin(), pendElements[std::distance(pendElements.begin(), PDindex)]);
-	// PDindex++;
-	// //------------------------------------------------------------------
-	// std::vector<int>::iterator it = pendElements.begin();
-	// while(it != pendElements.end())
-	// {
-	// 	std::cout << *it << " | ";
-	// 	it++;
-	// }
-	// std::cout << std::endl;
-	// //------------------------------------------------------------------
-	// std::vector<int>::iterator target = mainChain.begin();
-	// while (PDindex != pendElements.end())
-	// {
-	// 	mainChain.insert(target, pendElements[std::distance(pendElements.begin(), PDindex)]);
-		
-	// } 
-	// itt = mainChain.begin();
+	
 	while(itt != jacobsthalSeq.end())
 	{
 		std::cout << *itt << " | ";
@@ -165,27 +147,27 @@ std::vector<int>	JacobsthalSequence(std::vector<int> pendElements)
 	int target = 0;
 	while (actual != rawJacobsthalSeq.end())
 	{
-		std::cout << "out JS insertion -----> " << *actual << std::endl;
 		customJacobsthalSeq.insert(customJacobsthalSeq.begin() + index, *actual);
 		actual++;
-		if (index == 0)
-			customJacobsthalSeq.insert(customJacobsthalSeq.begin() + 1, 2);
+		if (*actual == 3)
+			target = 2;
 		else
+		{
 			target = *(actual - 1) - 1;
-		index++;
-		std::cout << "target --> " << target << std::endl;
-		std::cout << "prev --> " << *(actual - 1) << std::endl;
-		std::cout << "actual --> " << *actual << std::endl;
+			index++;
+		}
+		if (target == 2)
+		{
+			customJacobsthalSeq.insert(customJacobsthalSeq.begin() + 1, 2);
+			index++;
+			continue ;
+		}
 		while((target < *(actual - 1) && target > *(actual - 2)))
 		{
 			customJacobsthalSeq.insert(customJacobsthalSeq.begin() + index, target);
 			index++;
 			target--;
 		}
-		std::cout << "end of loop\n";
-		// std::cout << "entry target ---> " << target << std::endl;
-		// std::cout << "entry *actual ---> " << *actual << std::endl;
-		// std::cout << "entry *(actual - 1) ---> " << rawJacobsthalSeq[index] << std::endl;
 	}
 	return (customJacobsthalSeq);
 }
