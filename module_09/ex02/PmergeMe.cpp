@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/21 01:40:21 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/21 02:00:22 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,16 @@ int		binarySearch(std::vector<int> mainChain, int target, int low, int high)
 		return -1;
 }
 
+void	addElement(int target, std::vector<int> &mainChain, int &index)
+{
+	std::vector<int>::iterator MNindex = mainChain.begin();
+	int x = binarySearch(mainChain, target, 0, std::distance(mainChain.begin(), mainChain.end()));
+	std::advance(MNindex, x);
+	mainChain.insert(MNindex, target);
+	index++;
+}
+
+
 void	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainChain, int straggler)
 {
 	(void)straggler;
@@ -147,9 +157,8 @@ void	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainCha
 	std::vector<int>::iterator 	MNindex = mainChain.begin(); // iterator for insertion into mainChain
 	int index = 0;
 	mainChain.insert(mainChain.begin(), *(pendElements.begin())); // insert 1st element into mainChain
-	while (index < (int)pendElements.size())
+	while (index < (int)pendElements.size()) // insert the rest
 	{
-		int target = pendElements[jacobsthalSeq[index] - 1];
 		if (jacobsthalSeq[index] > (int)pendElements.size())
 		{
 			int internalIndex = jacobsthalSeq[index];
@@ -157,21 +166,18 @@ void	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainCha
 				internalIndex--;
 			while (internalIndex < jacobsthalSeq[index] && index < (int)pendElements.size() - 1)
 			{
-				target = pendElements.at(index + 1);
-				int x = binarySearch(mainChain, target, 0, std::distance(mainChain.begin(), mainChain.end()));
-				MNindex = mainChain.begin();
-				std::advance(MNindex, x);
-				mainChain.insert(MNindex, target);
+				addElement(pendElements.at(index + 1), mainChain, index);
 				internalIndex++;
-				index++;
 			}
 			break;
 		}
-		int x = binarySearch(mainChain, target, 0, std::distance(mainChain.begin(), mainChain.end()));
-		MNindex = mainChain.begin();
-		std::advance(MNindex, x);
-		mainChain.insert(MNindex, target);
-		index++;   
+		addElement(pendElements.at(index + 1), mainChain, index);
+	}
+	MNindex = mainChain.begin();
+	while (MNindex != mainChain.end())
+	{
+		std::cout << *MNindex << " | ";
+		MNindex++;
 	}
 }
 
