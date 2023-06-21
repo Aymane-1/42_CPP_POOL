@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/21 02:00:22 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/21 02:41:56 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ bool	descendOrder(const std::pair<int, int> &a, const std::pair<int, int> &b)
 	return (a.second < b.second);
 }
 
-void	divideSequence(std::vector<std::pair<int, int> > arrPairs, int straggler)
+std::vector<int>	divideSequence(std::vector<std::pair<int, int> > arrPairs, int straggler)
 {
 	std::vector<int> pendElements;
 	std::vector<int> mainChain;
@@ -117,7 +117,7 @@ void	divideSequence(std::vector<std::pair<int, int> > arrPairs, int straggler)
 		mainChain.push_back(it->second);
 		it++;
 	}
-	insertPendElements(pendElements, mainChain, straggler);
+	return (insertPendElements(pendElements, mainChain, straggler));
 }
 
 int		binarySearch(std::vector<int> mainChain, int target, int low, int high)
@@ -149,12 +149,18 @@ void	addElement(int target, std::vector<int> &mainChain, int &index)
 	index++;
 }
 
+void	addstraggler(int target, std::vector<int> &mainChain)
+{
+	std::vector<int>::iterator MNindex = mainChain.begin();
+	int x = binarySearch(mainChain, target, 0, std::distance(mainChain.begin(), mainChain.end()));
+	std::advance(MNindex, x);
+	mainChain.insert(MNindex, target);
+}
 
-void	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainChain, int straggler)
+std::vector<int>	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainChain, int straggler)
 {
 	(void)straggler;
 	std::vector<int>	jacobsthalSeq = JacobsthalSequence(pendElements); // custom jacobsthal sequence
-	std::vector<int>::iterator 	MNindex = mainChain.begin(); // iterator for insertion into mainChain
 	int index = 0;
 	mainChain.insert(mainChain.begin(), *(pendElements.begin())); // insert 1st element into mainChain
 	while (index < (int)pendElements.size()) // insert the rest
@@ -173,12 +179,7 @@ void	insertPendElements(std::vector<int> pendElements, std::vector<int> &mainCha
 		}
 		addElement(pendElements.at(index + 1), mainChain, index);
 	}
-	MNindex = mainChain.begin();
-	while (MNindex != mainChain.end())
-	{
-		std::cout << *MNindex << " | ";
-		MNindex++;
-	}
+	return (mainChain);
 }
 
 std::vector<int>	JacobsthalSequence(std::vector<int> pendElements)
@@ -225,10 +226,10 @@ std::vector<int>	JacobsthalSequence(std::vector<int> pendElements)
 void	fordJhonson(std::vector<int> &arr)
 {
 	int straggler = 0;
-	if (arr.size() % 2 != 0)
-		straggler = *(arr.end() - 1);                                              
 	std::vector<std::pair<int, int> > 	arrPairs = MakePairs(arr); // create pairs.
 	sortPairs(arrPairs); // sort each pair of [arrPairs] by biggest value.
 	std::sort(arrPairs.begin(), arrPairs.end(), descendOrder); // then sort the [arrPairs] as a whole by biggest value (the 'second' of each pair).
-	divideSequence(arrPairs, straggler); // create main chain and pend elements.
+	std::vector<int> mainChain = divideSequence(arrPairs, straggler); // create main chain and pend elements.
+	if (arr.size() % 2 != 0)
+		addstraggler(*(arr.end() - 1), mainChain);
 }
