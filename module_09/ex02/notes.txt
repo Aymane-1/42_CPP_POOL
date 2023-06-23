@@ -6,7 +6,7 @@
 #    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:49:09 by aechafii          #+#    #+#              #
-#    Updated: 2023/06/09 18:49:01 by aechafii         ###   ########.fr        #
+#    Updated: 2023/06/13 19:35:58 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,3 +31,20 @@
 
 
     let's start by spliting the array into pairs first and sort them.
+
+    3 234 | 9 876 |  9998 23423 | 4 8
+
+    a = 234 | 876 | 23423 | 8 . (Main chain)*
+    b =  3  |  9  |  9998 | 4 . (Pend elements)*
+
+  Jacobsthal numbers are a sequence of integers named after the Czech mathematician Ernst Jacobsthal.
+    The sequence is defined recursively as follows:
+  In other words, the first two Jacobsthal numbers are 0 and 1, and each subsequent number is the
+   sum of the previous two multiplied by 2.
+
+The Jacobsthal sequence begins:
+   0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, and so on.  
+so the formula is :
+  
+insertSmallestList() algorithm :
+  -      
