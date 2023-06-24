@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:15:48 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/22 16:09:27 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:44:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,14 @@ int main(int argc, char **argv)
 {
 	try
 	{
-		(void)argc;
-		(void)argv;
-		if (!argv[1][0])
+		if (argc < 3 || !argv[1][0] || !argv[2][0])
 		{
-			if (argc < 2)
-				std::cout << "Error: Invalid arguments!" << std::endl;
-			else
-				std::cout << "Error: Numbers should be 4 or more in order to start the sort!" << std::endl;
+			std::cout << "Error: Invalid arguments!" << std::endl;
 			return (0);
 		}
 		struct timeval 		startTime, endTime;
 		std::vector<int>	arr;
 		std::vector<int>	result;
-		std::string			input = "";
 		parser(argv, arr);
 		gettimeofday(&startTime, NULL);
 		result = fordJhonson(arr);
@@ -40,6 +34,17 @@ int main(int argc, char **argv)
 		std::cout << "After:  ";
 		printData(result);
 		std::cout << "Time to process a range of " << argc - 1 << " elements with std::[vector] : " << elapsedTime << " us" << std::endl;
+
+		//----------------------------------------***        DEQUE PART      ***-----------------------------------------------
+
+		std::deque<int>	_arr;
+		std::deque<int>	_result;
+		_parser(argv, _arr);
+		gettimeofday(&startTime, NULL);
+		_result = _fordJhonson(_arr);
+		gettimeofday(&endTime, NULL);
+		double _elapsedTime = getTimeLap(startTime, endTime);
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::[deque]  : " << _elapsedTime << " us" << std::endl;
 	}
 	catch(const std::exception& e)
 	{
