@@ -6,28 +6,12 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:17:36 by aechafii          #+#    #+#             */
-/*   Updated: 2023/06/24 21:39:17 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:41:28 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-void		parser(char **argv, std::vector<int> &arr)
-{
-	int 			i = 0;
-	std::string		input = "";
-	while (argv[++i])
-	{
-		input = static_cast<std::string>(argv[i]);
-		parseInput(input);
-	}
-	i = 0;
-	while (argv[++i])
-	{
-		input = static_cast<std::string>(argv[i]);
-		storeData(input, arr);
-	}
-}
 
 void	parseInput(std::string input)
 {
@@ -52,6 +36,23 @@ void	parseInput(std::string input)
 }
 
 //----------------------------------------***       VECTOR PART       ***-----------------------------------------------
+
+void		parser(char **argv, std::vector<int> &arr)
+{
+	int 			i = 0;
+	std::string		input = "";
+	while (argv[++i])
+	{
+		input = static_cast<std::string>(argv[i]);
+		parseInput(input);
+	}
+	i = 0;
+	while (argv[++i])
+	{
+		input = static_cast<std::string>(argv[i]);
+		storeData(input, arr);
+	}
+}
 
 void	storeData(std::string input, std::vector<int> &arr)
 {
@@ -426,9 +427,6 @@ std::deque<int>	_JacobsthalSequence(std::deque<int> pendElements)
 			target--;
 		}
 	}
-	std::deque<int>::iterator it = customJacobsthalSeq.end() - 1;
-	while (*it == 0)
-		customJacobsthalSeq.erase(it--);
 	return (customJacobsthalSeq);
 }
 
